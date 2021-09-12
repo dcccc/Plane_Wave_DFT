@@ -1,0 +1,1271 @@
+SIRIUS 7.0.2, git hash: https://api.github.com/repos/electronic-structure/SIRIUS/git/ref/tags/v7.0.2
+ DBCSR| CPU Multiplication driver                                           XSMM
+ DBCSR| Multrec recursion limit                                              512
+ DBCSR| Multiplication stack size                                           1000
+ DBCSR| Maximum elements for images                                    UNLIMITED
+ DBCSR| Multiplicative factor virtual images                                   1
+ DBCSR| Use multiplication densification                                       T
+ DBCSR| Multiplication size stacks                                             3
+ DBCSR| Use memory pool for CPU allocation                                     F
+ DBCSR| OMP: Current number of threads                                         6
+ DBCSR| OMP: Max number of threads                                             6
+ DBCSR| Split modifier for TAS multiplication algorithm                  1.0E+00
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2021-09-12 11:11:28.611
+ ***** ** ***  *** **   PROGRAM STARTED ON                             liwenfang
+ **    ****   ******    PROGRAM STARTED BY                            liwen.fang
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  1523
+  **** **  *******  **  PROGRAM STARTED IN                                     /
+
+ CP2K| version string:                                          CP2K version 8.2
+ CP2K| source code revision number:                                  git:310b7ab
+ CP2K| cp2kflags: omp libint fftw3 libxc pexsi quip xsmm spglib sirius libvori l
+ CP2K|            ibbqb
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                          Mon May 31 13:40:26 JST 2021
+ CP2K| Program compiled on                                       DESKTOP-2FK7NUA
+ CP2K| Program compiled for                               Cygwin-x86_64-gfortran
+ CP2K| Data directory path                              /home/user/cp2k-8.2/data
+ CP2K| Input file name                                                    N2.txt
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name                                           BASIS_SET
+ GLOBAL| Potential file name                                           POTENTIAL
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                      __STD_INPUT__
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                       Gold
+ GLOBAL| Run type                                                         ENERGY
+ GLOBAL| FFT library                                                       FFTW3
+ GLOBAL| Diagonalization library                                       ScaLAPACK
+ GLOBAL| Orthonormality check for eigenvectors                          DISABLED
+ GLOBAL| Matrix multiplication library                                    SCALAP
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Grid backend                                                       AUTO
+ GLOBAL| Global print level                                               MEDIUM
+ GLOBAL| MPI I/O enabled                                                       T
+ GLOBAL| Total number of message passing processes                             1
+ GLOBAL| Number of threads for this process                                    6
+ GLOBAL| This output is from process                                           0
+ GLOBAL| CPU model name                  Intel(R) Core(TM) i5-8400 CPU @ 2.80GHz
+ GLOBAL| CPUID                                                              1002
+ GLOBAL| Compiled for CPUID                                                    0
+
+ *** HINT in environment.F:872 :: The compiler target flags (generic) used ***
+ *** to build this binary cannot exploit all extensions of this CPU model  ***
+ *** (x86_avx2). Consider compiler target flags as part of FCFLAGS and     ***
+ *** CFLAGS (ARCH file).                                                   ***
+
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal             16607632      16607632      16607632      16607632
+ MEMORY| MemFree               2541968       2541968       2541968       2541968
+ MEMORY| Buffers                     0             0             0             0
+ MEMORY| Cached                      0             0             0             0
+ MEMORY| Slab                        0             0             0             0
+ MEMORY| SReclaimable                0             0             0             0
+ MEMORY| MemLikelyFree         2541968       2541968       2541968       2541968
+
+
+ *** Fundamental physical constants (SI units) ***
+
+ *** Literature: B. J. Mohr and B. N. Taylor,
+ ***             CODATA recommended values of the fundamental physical
+ ***             constants: 2006, Web Version 5.1
+ ***             http://physics.nist.gov/constants
+
+ Speed of light in vacuum [m/s]                             2.99792458000000E+08
+ Magnetic constant or permeability of vacuum [N/A**2]       1.25663706143592E-06
+ Electric constant or permittivity of vacuum [F/m]          8.85418781762039E-12
+ Planck constant (h) [J*s]                                  6.62606896000000E-34
+ Planck constant (h-bar) [J*s]                              1.05457162825177E-34
+ Elementary charge [C]                                      1.60217648700000E-19
+ Electron mass [kg]                                         9.10938215000000E-31
+ Electron g factor [ ]                                     -2.00231930436220E+00
+ Proton mass [kg]                                           1.67262163700000E-27
+ Fine-structure constant                                    7.29735253760000E-03
+ Rydberg constant [1/m]                                     1.09737315685270E+07
+ Avogadro constant [1/mol]                                  6.02214179000000E+23
+ Boltzmann constant [J/K]                                   1.38065040000000E-23
+ Atomic mass unit [kg]                                      1.66053878200000E-27
+ Bohr radius [m]                                            5.29177208590000E-11
+
+ *** Conversion factors ***
+
+ [u] -> [a.u.]                                              1.82288848426455E+03
+ [Angstrom] -> [Bohr] = [a.u.]                              1.88972613288564E+00
+ [a.u.] = [Bohr] -> [Angstrom]                              5.29177208590000E-01
+ [a.u.] -> [s]                                              2.41888432650478E-17
+ [a.u.] -> [fs]                                             2.41888432650478E-02
+ [a.u.] -> [J]                                              4.35974393937059E-18
+ [a.u.] -> [N]                                              8.23872205491840E-08
+ [a.u.] -> [K]                                              3.15774647902944E+05
+ [a.u.] -> [kJ/mol]                                         2.62549961709828E+03
+ [a.u.] -> [kcal/mol]                                       6.27509468713739E+02
+ [a.u.] -> [Pa]                                             2.94210107994716E+13
+ [a.u.] -> [bar]                                            2.94210107994716E+08
+ [a.u.] -> [atm]                                            2.90362800883016E+08
+ [a.u.] -> [eV]                                             2.72113838565563E+01
+ [a.u.] -> [Hz]                                             6.57968392072181E+15
+ [a.u.] -> [1/cm] (wave numbers)                            2.19474631370540E+05
+ [a.u./Bohr**2] -> [1/cm]                                   5.14048714338585E+03
+ 
+
+ CELL_TOP| Volume [angstrom^3]:                                       606.964570
+ CELL_TOP| Vector a [angstrom     8.467     0.000     0.000   |a| =     8.466835
+ CELL_TOP| Vector b [angstrom     0.000     8.467     0.000   |b| =     8.466835
+ CELL_TOP| Vector c [angstrom     0.000     0.000     8.467   |c| =     8.466835
+ CELL_TOP| Angle (b,c), alpha [degree]:                                90.000000
+ CELL_TOP| Angle (a,c), beta  [degree]:                                90.000000
+ CELL_TOP| Angle (a,b), gamma [degree]:                                90.000000
+ CELL_TOP| Numerically orthorhombic:                                         YES
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ CELL| Volume [angstrom^3]:                                           606.964570
+ CELL| Vector a [angstrom]:       8.467     0.000     0.000   |a| =     8.466835
+ CELL| Vector b [angstrom]:       0.000     8.467     0.000   |b| =     8.466835
+ CELL| Vector c [angstrom]:       0.000     0.000     8.467   |c| =     8.466835
+ CELL| Angle (b,c), alpha [degree]:                                    90.000000
+ CELL| Angle (a,c), beta  [degree]:                                    90.000000
+ CELL| Angle (a,b), gamma [degree]:                                    90.000000
+ CELL| Numerically orthorhombic:                                             YES
+
+ CELL_REF| Volume [angstrom^3]:                                       606.964570
+ CELL_REF| Vector a [angstrom     8.467     0.000     0.000   |a| =     8.466835
+ CELL_REF| Vector b [angstrom     0.000     8.467     0.000   |b| =     8.466835
+ CELL_REF| Vector c [angstrom     0.000     0.000     8.467   |c| =     8.466835
+ CELL_REF| Angle (b,c), alpha [degree]:                                90.000000
+ CELL_REF| Angle (a,c), beta  [degree]:                                90.000000
+ CELL_REF| Angle (a,b), gamma [degree]:                                90.000000
+ CELL_REF| Numerically orthorhombic:                                         YES
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **   #### ##   ## ####  ##### #####           #### ## ####  ## ## ##  ####   **
+ **   ## ####   ## ## ## ###   #####          ##    ## ##  # ## ## ## ##      **
+ **   #### ## # ## ## ## #####  ###           ##### ## ####  ## ## ## #####   **
+ **   ##   ####### ## ## ##     ###              ## ## ## #  ## #####    ##   **
+ **   ##   ## # ## ####  ##     ###           ####  ## ##  # ## ##### ####    **
+ **                                                                           **
+ **   SIRIUS: Domain specific library for electronic structure calculations   **
+ **                                                                           **
+ *******************************************************************************
+
+
+ ATOMIC KIND INFORMATION
+
+  1. Atomic kind: N                                     Number of atoms:       2
+
+       Atomic covalent radius [Angstrom]:                                  0.750
+
+       Atomic van der Waals radius [Angstrom]:                             1.550
+
+     GTH Potential information for                                    GTH-PBE-q5
+
+       Description:                       Goedecker-Teter-Hutter pseudopotential
+                                           Goedecker et al., PRB 54, 1703 (1996)
+                                          Hartwigsen et al., PRB 58, 3641 (1998)
+                                                      Krack, TCA 114, 145 (2005)
+
+       Gaussian exponent of the core charge distribution:               6.208322
+       Electronic configuration (s p d ...):                               2   3
+
+       Parameters of the local part of the GTH pseudopotential:
+
+                          rloc        C1          C2          C3          C4
+                        0.283791  -12.415226    1.868096
+
+       Parameters of the non-local part of the GTH pseudopotential:
+
+                   l      r(l)      h(i,j,l)
+
+                   0    0.255405   13.630263
+                   1    0.245495
+
+
+ MODULE PWDFT/SIRIUS:  ATOMIC COORDINATES IN angstrom
+
+  Atom  Kind  Element       X           Y           Z          Z(eff)       Mass
+
+       1     1 N    7    0.000000    0.000000    0.000000      5.0000      14.0067
+       2     1 N    7    1.250000    0.000000    0.000000      5.0000      14.0067
+
+
+ ================================== SIRIUS INIT =================================
+parameters spin_orbit
+
+SIRIUS version : 7.0.2
+git hash       : https://api.github.com/repos/electronic-structure/SIRIUS/git/ref/tags/v7.0.2
+git branch     : release v7.0.2
+build time     : 2021-02-23 06:46:34
+start time     : Sun, 12 Sep 2021 11:11:31
+
+number of MPI ranks           : 1
+MPI grid                      : 1 1 1
+maximum number of OMP threads : 6
+number of MPI ranks per node  : 1
+page size (Kb)                : 64
+number of pages               : 259494
+available memory (GB)         : 15
+
+FFT context for density and potential
+=====================================
+  comm size                             : 1
+  plane wave cutoff                     : 10.954451
+  grid size                             : 60 60 60   total : 216000
+  grid limits                           : -29 30   -29 30   -29 30
+  number of G-vectors within the cutoff : 45524
+  local number of G-vectors             : 45524
+  number of G-shells                    : 651
+
+FFT context for coarse grid
+=====================================
+  comm size                             : 1
+  plane wave cutoff                     : 10.954451
+  grid size                             : 60 60 60   total : 216000
+  grid limits                           : -29 30   -29 30   -29 30
+  number of G-vectors within the cutoff : 45524
+  local number of G-vectors             : 45524
+  number of G-shells                    : 651
+
+number of local G-vector blocks: 1
+
+Unit cell
+--------------------------------------------------------------------------------
+lattice vectors
+  a1 :      16.0000000000       0.0000000000       0.0000000000 
+  a2 :       0.0000000000      16.0000000000       0.0000000000 
+  a3 :       0.0000000000       0.0000000000      16.0000000000 
+reciprocal lattice vectors
+  b1 :       0.3926990817       0.0000000000       0.0000000000 
+  b2 :       0.0000000000       0.3926990817       0.0000000000 
+  b3 :       0.0000000000       0.0000000000       0.3926990817 
+
+unit cell volume :      4096.00000000 [a.u.^3]
+1/sqrt(omega)    :         0.01562500
+MT volume        : 0.000000 ( 0.00%)
+IT volume        : 4096.000000 (100.00%)
+
+number of atom types : 1
+type id : 0   symbol :      mt_radius :  43.604466, num_atoms: 2
+total number of atoms : 2
+number of symmetry classes : 1
+number of PAW atoms : 0
+
+minimum bond length:       2.362157656800
+
+number of pseudo wave-functions: 8
+
+space group number   : 123
+international symbol : P4/mmm
+Hall symbol          : -P 4 2
+number of operations : 16
+transformation matrix : 
+    0.000000     1.000000     0.000000 
+    0.000000     0.000000     1.000000 
+    1.000000     0.000000     0.000000 
+origin shift : 
+    0.000000     0.000000     0.926183
+
+label          : N
+--------------------------------------------------------------------------------
+symbol         : 
+name           : 
+zn             : 5
+mass           : 25532.652133
+mt_radius      : 43.604466
+num_mt_points  : 929
+grid_origin    : 0.000000
+grid_name      : external
+
+number of core electrons    : 0.000000
+number of valence electrons : 5.000000
+
+total number of radial functions : 1
+lmax of radial functions         : 0
+max. number of radial functions  : 1
+total number of basis functions  : 1
+number of aw basis functions     : 0
+number of lo basis functions     : 1
+lmax of beta-projectors          : 0
+number of ps wavefunctions       : 2
+charge augmentation              : false
+Hubbard correction               : false
+spin-orbit coupling              : false
+
+Basic information
+--------------------------------------------------------------------------------
+total nuclear charge               : 10
+number of core electrons           : 0.000000
+number of valence electrons        : 10.000000
+total number of electrons          : 10.000000
+extra charge                       : 0.000000
+total number of aw basis functions : 0
+total number of lo basis functions : 2
+number of first-variational states : -1
+number of bands                    : 30
+number of spins                    : 2
+number of magnetic dimensions      : 3
+lmax_apw                           : -1
+lmax_rho                           : 0
+lmax_pot                           : 0
+lmax_rf                            : 0
+smearing width                     : 0.000000
+cyclic block size                  : 32
+|G+k| cutoff                       : 5.477226
+symmetry                           : true
+valence relativity                 : zora
+core relativity                    : Dirac
+standard eigen-value solver        : LAPACK
+generalized eigen-value solver     : LAPACK
+processing unit                    : CPU
+
+iterative solver                   : davidson
+number of steps                    : 200
+subspace size                      : 4
+early restart ratio                : 0.50
+
+spglib version: 1.16.1
+HDF5 version: 1.10.6
+Libxc version: 4.3.4
+
+XC functionals
+==============
+1) XC_LDA_C_XALPHA: Slater's Xalpha
+J. C. Slater, Phys. Rev. 81, 385 (1951) (10.1103/PhysRev.81.385)
+
+
+memory consumption
+==================
+approximate number of G+k vectors        : 11365
+approximate number of G vectors          : 45462
+approximate number of coarse G vectors   : 45462
+approximate size of wave-functions for each k-point: 10 Mb, 10 Mb/rank
+approximate memory consumption of Davidson solver: 171 Mb/rank
+approximate memory consumption of FFT transforms: 6 Mb/rank
+
+total number of k-points : 1
+--------------------------------------------------------------------------------
+  ik                vk                    weight  num_gkvec
+--------------------------------------------------------------------------------
+   0     0.0000   0.0000   0.0000       1.000000      11363
+ ========================= SIRIUS INIT FINISHED =================================
+ ============================= SIRIUS UPDATE CONTEXT============================
+ ==================== SIRIUS UPDATE CONTEXT FINISHED============================
+
++------------------------------+
+| SCF iteration   0 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000010000000
+[solve] average number of iterations:    24.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -2.08683588
+<rho|V^{XC}>              :        -2.34459604
+<rho|E^{XC}>              :        -1.75844703
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        29.07630158
+one-electron contribution :       -28.81854143 (Ha),       -57.63708285 (Ry)
+hartree contribution      :        14.53815079
+xc contribution           :        -1.75844703
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -14.24820302 (Ha),       -28.49640604 (Ry)
+
+band gap (eV) :         2.23091103
+Efermi        :        -0.01250000
+
+[find] iteration :   0, RMS 7.386402433666E-03, energy difference : -1.424820301760E+01
+
++------------------------------+
+| SCF iteration   1 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000005000000
+[solve] average number of iterations:     9.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -4.46821373
+<rho|V^{XC}>              :        -2.46787325
+<rho|E^{XC}>              :        -1.85090494
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.29453045
+one-electron contribution :       -33.29487094 (Ha),       -66.58974187 (Ry)
+hartree contribution      :        15.64726522
+xc contribution           :        -1.85090494
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -17.70787600 (Ha),       -35.41575200 (Ry)
+
+band gap (eV) :         7.01985952
+Efermi        :        -0.09062500
+
+[find] iteration :   1, RMS 3.163920377360E-03, energy difference : -3.459672984247E+00
+
++------------------------------+
+| SCF iteration   2 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000002500000
+[solve] average number of iterations:     9.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,   0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.33398416
+<rho|V^{XC}>              :        -2.48967702
+<rho|E^{XC}>              :        -1.86725776
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.71129532
+one-electron contribution :       -32.55560246 (Ha),       -65.11120492 (Ry)
+hartree contribution      :        15.85564766
+xc contribution           :        -1.86725776
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.77657792 (Ha),       -33.55315583 (Ry)
+
+band gap (eV) :         4.89251369
+Efermi        :        -0.01250000
+
+[find] iteration :   2, RMS 9.052290100746E-04, energy difference : 9.312980853561E-01
+
++------------------------------+
+| SCF iteration   3 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000905229
+[solve] average number of iterations:     7.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,   0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.12998835
+<rho|V^{XC}>              :        -2.47871686
+<rho|E^{XC}>              :        -1.85903764
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51714678
+one-electron contribution :       -32.16841827 (Ha),       -64.33683655 (Ry)
+hartree contribution      :        15.75857339
+xc contribution           :        -1.85903764
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.47824788 (Ha),       -32.95649576 (Ry)
+
+band gap (eV) :         4.40940838
+Efermi        :        -0.01250000
+
+[find] iteration :   3, RMS 2.860972578579E-04, energy difference : 2.983300361173E-01
+
++------------------------------+
+| SCF iteration   4 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000286097
+[solve] average number of iterations:     7.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,   0.0000,  -0.0000]    0.000000
+   1  [ -0.0000,   0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22387828
+<rho|V^{XC}>              :        -2.47863788
+<rho|E^{XC}>              :        -1.85897841
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51547751
+one-electron contribution :       -32.26071790 (Ha),       -64.52143581 (Ry)
+hartree contribution      :        15.75773876
+xc contribution           :        -1.85897841
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57132292 (Ha),       -33.14264583 (Ry)
+
+band gap (eV) :         4.64625352
+Efermi        :        -0.01250000
+
+[find] iteration :   4, RMS 2.354211618240E-05, energy difference : -9.307503562361E-02
+
++------------------------------+
+| SCF iteration   5 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000023542
+[solve] average number of iterations:    50.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [ -0.0000,   0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22469309
+<rho|V^{XC}>              :        -2.47881826
+<rho|E^{XC}>              :        -1.85911370
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51876482
+one-electron contribution :       -32.26463965 (Ha),       -64.52927929 (Ry)
+hartree contribution      :        15.75938241
+xc contribution           :        -1.85911370
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57373629 (Ha),       -33.14747258 (Ry)
+
+band gap (eV) :         4.65861560
+Efermi        :        -0.01250000
+
+[find] iteration :   5, RMS 3.839679771170E-06, energy difference : -2.413372826577E-03
+
++------------------------------+
+| SCF iteration   6 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000003840
+[solve] average number of iterations:    10.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,   0.0000]    0.000000
+   1  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22309448
+<rho|V^{XC}>              :        -2.47877266
+<rho|E^{XC}>              :        -1.85907950
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51790274
+one-electron contribution :       -32.26222456 (Ha),       -64.52444911 (Ry)
+hartree contribution      :        15.75895137
+xc contribution           :        -1.85907950
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57171804 (Ha),       -33.14343608 (Ry)
+
+band gap (eV) :         4.65555768
+Efermi        :        -0.01250000
+
+[find] iteration :   6, RMS 9.679963424843E-07, energy difference : 2.018248279253E-03
+
++------------------------------+
+| SCF iteration   7 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000968
+[solve] average number of iterations:     4.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,   0.0000]    0.000000
+   1  [ -0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351412
+<rho|V^{XC}>              :        -2.47877195
+<rho|E^{XC}>              :        -1.85907896
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51788906
+one-electron contribution :       -32.26263123 (Ha),       -64.52526246 (Ry)
+hartree contribution      :        15.75894453
+xc contribution           :        -1.85907896
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213102 (Ha),       -33.14426203 (Ry)
+
+band gap (eV) :         4.65665805
+Efermi        :        -0.01250000
+
+[find] iteration :   7, RMS 1.103377199355E-07, energy difference : -4.129746652204E-04
+
++------------------------------+
+| SCF iteration   8 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000110
+[solve] average number of iterations:    12.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,   0.0000,  -0.0000]    0.000000
+   1  [  0.0000,   0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22352078
+<rho|V^{XC}>              :        -2.47877290
+<rho|E^{XC}>              :        -1.85907968
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51790048
+one-electron contribution :       -32.26264836 (Ha),       -64.52529671 (Ry)
+hartree contribution      :        15.75895024
+xc contribution           :        -1.85907968
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57214315 (Ha),       -33.14428629 (Ry)
+
+band gap (eV) :         4.65667330
+Efermi        :        -0.01250000
+
+[find] iteration :   8, RMS 8.520162464252E-08, energy difference : -1.213135773881E-05
+
++------------------------------+
+| SCF iteration   9 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000055
+[solve] average number of iterations:     1.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,   0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,  -0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351530
+<rho|V^{XC}>              :        -2.47877279
+<rho|E^{XC}>              :        -1.85907959
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789614
+one-electron contribution :       -32.26263865 (Ha),       -64.52527730 (Ry)
+hartree contribution      :        15.75894807
+xc contribution           :        -1.85907959
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213553 (Ha),       -33.14427106 (Ry)
+
+band gap (eV) :         4.65665764
+Efermi        :        -0.01250000
+
+[find] iteration :   9, RMS 1.400611729788E-08, energy difference : 7.616376976216E-06
+
++------------------------------+
+| SCF iteration  10 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000014
+[solve] average number of iterations:     1.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [ -0.0000,  -0.0000,   0.0000]    0.000000
+   1  [ -0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351745
+<rho|V^{XC}>              :        -2.47877293
+<rho|E^{XC}>              :        -1.85907970
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789805
+one-electron contribution :       -32.26264257 (Ha),       -64.52528514 (Ry)
+hartree contribution      :        15.75894902
+xc contribution           :        -1.85907970
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213860 (Ha),       -33.14427719 (Ry)
+
+band gap (eV) :         4.65666027
+Efermi        :        -0.01250000
+
+[find] iteration :  10, RMS 8.226775584834E-09, energy difference : -3.066741498969E-06
+
++------------------------------+
+| SCF iteration  11 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000007
+[solve] average number of iterations:     2.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,   0.0000,  -0.0000]    0.000000
+   1  [  0.0000,   0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351653
+<rho|V^{XC}>              :        -2.47877305
+<rho|E^{XC}>              :        -1.85907979
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789917
+one-electron contribution :       -32.26264265 (Ha),       -64.52528530 (Ry)
+hartree contribution      :        15.75894959
+xc contribution           :        -1.85907979
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213821 (Ha),       -33.14427641 (Ry)
+
+band gap (eV) :         4.65665710
+Efermi        :        -0.01250000
+
+[find] iteration :  11, RMS 6.366717796063E-09, energy difference : 3.905146037653E-07
+
++------------------------------+
+| SCF iteration  12 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000004
+[solve] average number of iterations:     3.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351600
+<rho|V^{XC}>              :        -2.47877305
+<rho|E^{XC}>              :        -1.85907979
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789921
+one-electron contribution :       -32.26264216 (Ha),       -64.52528431 (Ry)
+hartree contribution      :        15.75894961
+xc contribution           :        -1.85907979
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213769 (Ha),       -33.14427539 (Ry)
+
+band gap (eV) :         4.65665356
+Efermi        :        -0.01250000
+
+[find] iteration :  12, RMS 1.620963457220E-09, energy difference : 5.120718071794E-07
+
++------------------------------+
+| SCF iteration  13 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000002
+[solve] average number of iterations:     2.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,  -0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351598
+<rho|V^{XC}>              :        -2.47877304
+<rho|E^{XC}>              :        -1.85907978
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789903
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894951
+xc contribution           :        -1.85907978
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213758 (Ha),       -33.14427517 (Ry)
+
+band gap (eV) :         4.65665382
+Efermi        :        -0.01250000
+
+[find] iteration :  13, RMS 7.942928265145E-10, energy difference : 1.093717933998E-07
+
++------------------------------+
+| SCF iteration  14 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000001
+[solve] average number of iterations:     2.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,   0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351607
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789881
+one-electron contribution :       -32.26264185 (Ha),       -64.52528369 (Ry)
+hartree contribution      :        15.75894940
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213757 (Ha),       -33.14427514 (Ry)
+
+band gap (eV) :         4.65665415
+Efermi        :        -0.01250000
+
+[find] iteration :  14, RMS 4.096070849686E-10, energy difference : 1.655829606761E-08
+
++------------------------------+
+| SCF iteration  15 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351617
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789874
+one-electron contribution :       -32.26264189 (Ha),       -64.52528377 (Ry)
+hartree contribution      :        15.75894937
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213764 (Ha),       -33.14427528 (Ry)
+
+band gap (eV) :         4.65665442
+Efermi        :        -0.01250000
+
+[find] iteration :  15, RMS 2.369524406766E-10, energy difference : -7.317875372337E-08
+
++------------------------------+
+| SCF iteration  16 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,  -0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351621
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789878
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894939
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213770 (Ha),       -33.14427539 (Ry)
+
+band gap (eV) :         4.65665450
+Efermi        :        -0.01250000
+
+[find] iteration :  16, RMS 1.560647210831E-10, energy difference : -5.390019452989E-08
+
++------------------------------+
+| SCF iteration  17 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351619
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789882
+one-electron contribution :       -32.26264198 (Ha),       -64.52528396 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213770 (Ha),       -33.14427539 (Ry)
+
+band gap (eV) :         4.65665442
+Efermi        :        -0.01250000
+
+[find] iteration :  17, RMS 8.423726374655E-11, energy difference : 3.773941159579E-10
+
++------------------------------+
+| SCF iteration  18 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351617
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789883
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213768 (Ha),       -33.14427535 (Ry)
+
+band gap (eV) :         4.65665434
+Efermi        :        -0.01250000
+
+[find] iteration :  18, RMS 4.637163429244E-12, energy difference : 1.965660345604E-08
+
++------------------------------+
+| SCF iteration  19 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,   0.0000,  -0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351617
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789883
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213768 (Ha),       -33.14427535 (Ry)
+
+band gap (eV) :         4.65665434
+Efermi        :        -0.01250000
+
+[find] iteration :  19, RMS 2.495730815911E-12, energy difference : -8.369802628749E-10
+
++------------------------------+
+| SCF iteration  20 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351616
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789883
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213767 (Ha),       -33.14427535 (Ry)
+
+band gap (eV) :         4.65665434
+Efermi        :        -0.01250000
+
+[find] iteration :  20, RMS 1.373079802819E-12, energy difference : 1.753011957817E-09
+
++------------------------------+
+| SCF iteration  21 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [ -0.0000,  -0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351616
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789883
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213768 (Ha),       -33.14427535 (Ry)
+
+band gap (eV) :         4.65665434
+Efermi        :        -0.01250000
+
+[find] iteration :  21, RMS 3.170049100363E-13, energy difference : -4.737756853501E-10
+
++------------------------------+
+| SCF iteration  22 out of 100 |
++------------------------------+
+[solve] iterative solver tolerance:     0.000000000000
+[solve] average number of iterations:     0.000000
+
+Charges and magnetic moments
+--------------------------------------------------------------------------------
+atom              moment                |moment|
+--------------------------------------------------------------------------------
+   0  [  0.0000,  -0.0000,  -0.0000]    0.000000
+   1  [  0.0000,  -0.0000,   0.0000]    0.000000
+
+total charge          :  10.000000
+total moment          : [  0.0000,   0.0000,   0.0000], magnitude :   0.000000
+
+Energy
+--------------------------------------------------------------------------------
+valence_eval_sum          :        -3.22351616
+<rho|V^{XC}>              :        -2.47877303
+<rho|E^{XC}>              :        -1.85907977
+<mag|B^{XC}>              :         0.00000000
+<rho|V^{H}>               :        31.51789883
+one-electron contribution :       -32.26264196 (Ha),       -64.52528392 (Ry)
+hartree contribution      :        15.75894941
+xc contribution           :        -1.85907977
+ewald contribution        :         1.79063465
+PAW contribution          :         0.00000000
+Total energy              :       -16.57213767 (Ha),       -33.14427535 (Ry)
+
+band gap (eV) :         4.65665434
+Efermi        :        -0.01250000
+
+[find] iteration :  22, RMS 6.081189071189E-16, energy difference : 7.595701845275E-11
+[find] 
+converged after 23 SCF iterations!
+
+ ENERGY| Total FORCE_EVAL ( SIRIUS ) energy [a.u.]:          -16.572137674941924
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                         0.000000E+00       0.0%      0.0%      0.0%
+ flops max/rank                      0.000000E+00       0.0%      0.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                                  0       0.0%      0.0%      0.0%
+ number of processed stacks                     0       0.0%      0.0%      0.0%
+ average stack size                                     0.0       0.0       0.0
+ marketing flops                     0.000000E+00
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                GRID STATISTICS                              -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ LP    KERNEL             BACKEND                              COUNT     PERCENT
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                 753
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 8.2, the CP2K developers group (2021).
+ CP2K is freely available from https://www.cp2k.org/ .
+
+ Schuett, Ole; Messmer, Peter; Hutter, Juerg; VandeVondele, Joost. 
+ Electronic Structure Calculations on Graphics Processing Units, John
+ Wiley & Sons, Ltd, 173-190 (2016). 
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for
+ Linear Scaling Density Functional Theory.
+ https://doi.org/10.1002/9781118670712.ch8
+
+ Heinecke, A; Henry, G; Hutchinson, M; Pabst, H. 
+ Proceedings of Intl. Supercomputing Conference, 981-991 (2016). 
+ LIBXSMM: Accelerating Small Matrix Multiplications
+ by Runtime Code Generation.
+ https://doi.org/10.1109/SC.2016.83
+
+ Borstnik, U; VandeVondele, J; Weber, V; Hutter, J. 
+ PARALLEL COMPUTING, 40 (5-6), 47-58 (2014). 
+ Sparse matrix multiplication: The distributed block-compressed sparse
+ row library.
+ https://doi.org/10.1016/j.parco.2014.03.012
+
+ Hutter, J; Iannuzzi, M; Schiffmann, F; VandeVondele, J. 
+ WIREs Comput Mol Sci., 4 (1), 15-25 (2014). 
+ CP2K: atomistic simulations of condensed matter systems.
+ https://doi.org/10.1002/wcms.1159
+
+ Krack, M. 
+ THEORETICAL CHEMISTRY ACCOUNTS, 114 (1-3), 145-152 (2005). 
+ Pseudopotentials for H to Kr optimized for gradient-corrected
+ exchange-correlation functionals.
+ https://doi.org/10.1007/s00214-005-0655-y
+
+ Frigo, M; Johnson, SG. 
+ PROCEEDINGS OF THE IEEE, 93 (2), 216-231 (2005). 
+ The design and implementation of FFTW3.
+ https://doi.org/10.1109/JPROC.2004.840301
+
+ Hartwigsen, C; Goedecker, S; Hutter, J. 
+ PHYSICAL REVIEW B, 58 (7), 3641-3662 (1998). 
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ https://doi.org/10.1103/PhysRevB.58.3641
+
+ Goedecker, S; Teter, M; Hutter, J. 
+ PHYSICAL REVIEW B, 54 (3), 1703-1710 (1996). 
+ Separable dual-space Gaussian pseudopotentials.
+ https://doi.org/10.1103/PhysRevB.54.1703
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.158    0.158   34.180   34.180
+ pwdft_calc_energy_force              1  2.0   32.406   32.406   32.406   32.406
+ pwdft_init                           1  2.0    1.558    1.558    1.613    1.613
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 0
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2021-09-12 11:12:05.335
+ ***** ** ***  *** **   PROGRAM RAN ON                                 liwenfang
+ **    ****   ******    PROGRAM RAN BY                                liwen.fang
+ ***** **    ** ** **   PROGRAM PROCESS ID                                  1523
+  **** **  *******  **  PROGRAM STOPPED IN                                     /
