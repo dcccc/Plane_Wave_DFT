@@ -56,5 +56,7 @@ python pwdft.py CH4.txt
 ## 参考资料
 
 [1]  https://github.com/f-fathurrahman/PWDFT.jl
+
 [2]  J. C. Slater, Phys. Rev. 81, 385 (1951) 
+
 [3]  https://github.com/juerghutter/GTH
