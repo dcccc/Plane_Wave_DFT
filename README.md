@@ -63,6 +63,7 @@ Here we used the simplest functional, the xalpha[2], and psuedopotential is norm
 4. As use the fixed occuption method and only the gamma point, for unlocalized systems, the scf will not be converged. But for localized systems, the scf is easy to converge
 
 
+---------------------------------------------------------------------
 
 ## 平面波密度泛函方法
 
