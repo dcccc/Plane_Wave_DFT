@@ -51,7 +51,7 @@ Running the the CH4 sample input file, total energy of -6.16333698 Hatree will b
 Here we used the simplest functional, the xalpha[2], and psuedopotential is norm-conserving potential[3]
 
 
-## Possilbe Bus
+## Possilbe Bugs
 
 
 1. For norm-conserving potential, the default cutoff energy of 15.0 Hatree is small, so the calculation for the sample CH4 is not acurrate enough
