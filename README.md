@@ -2,11 +2,11 @@
 
 ## Plane Wave DFT
 
-A plane wave basis DFT code, which writed using python. This code is translated from the julia code by f-fathurrahman[1], and for a better understanding about plane wave basis DFT method.
+A plane-wave basis DFT code, which writed with python. This code is translated from the julia code by f-fathurrahman[1], and the purpose is to get a better understanding about plane-wave basis DFT method.
 
 ## How To Run
 
-A sample input file for the calculation of a CH4 molecule in box is as below
+A sample input file for the calculation of a ch4 molecule in box is as below
 
 ```
 e_cut 15
@@ -24,43 +24,43 @@ H      0.4140015244     0.6047569793      0.5961894333
 
 ```
 
-The first line is wavefunction cutoff energy setting, default value is 15.0 Hatree. If this line is omitted, the default value is used.
+The first line of input text is the wavefunction cutoff energy parameter, the default value is 15.0 Hatree. If this line is omitted, the default value 15 Hartree will be used.
 
-The second line is number of states setting, if setted 0 or not setted, or the value is smaller then the half of the number of total electrons, then an integer of no samller than the half of the number of total electrons will be used.
+The second line is the number of states you want to calculate, if the parameter is 0, not setted, or the value is smaller then the half of the total electron number, an integer of no samller than half of the total electrons number will be used.
 
-4th to 6th line used to set the box lattice, and unit is Bohr
+4th to 6th line is the box lattice, and unit is Bohr
 
-8th to end line is the atom symbols and fraction coordinates
+8th to end line is the atom symbols and their fraction coordinates
 
 
-When input file is ready, we can ennter the source directory and run the calculation
+When the input file is ready, we can ennter the source directory and run the calculation
 
 ```bash
 python pwdft.py CH4.txt
 ```
 
 
-then the output line will be on the screen 
+Then the output text will be printed on the screen.
 
 
 
 ## Result Compared With CP2k
 
-Running the the CH4 sample input file, total energy of -6.16333698 Hatree will be got, this is same with the result by cp2k. The CH4 sample input file for cp2k is also included in the example directory
+Total energy of CH4 sample calculation is -6.16333698 Hatree, which is same with the result by cp2k. The ch4 input file for cp2k is also included in the example directory.
 
-Here we used the simplest functional, the xalpha[2], and psuedopotential is norm-conserving potential[3]
-
-
-## Possilbe Bugs
+In the calculaiton of ch4 example, we use the simplest functional, the xalpha[2], and psuedopotential is norm-conserving potential[3]
 
 
-1. For norm-conserving potential, the default cutoff energy of 15.0 Hatree is small, so the calculation for the sample CH4 is not acurrate enough
+## Possible Bugs
 
-2. Only few sample cases are tested, elements with larger atom numer are not tested, so there may be some wrong result for those elements
 
-3. The code is writed by pure python, and no optimize, so calcualtion may be Unacceptably slow for big systems. You should use a more mature code to do the serious calculation, like quantum espresso
+1. As to norm-conserving potential, the default cutoff energy of 15.0 Hatree is too small, so the calculation for the example ch4 is not acurrate enough
 
-4. As use the fixed occuption method and only the gamma point, for unlocalized systems, the scf will not be converged. But for localized systems, the scf is easy to converge
+2. Only few sample cases are tested, example with elements of larger atom number are not tested, so there may be some wrong result for those elements
+
+3. The code is pure python and not optimized, so calcualtion may be Unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
+
+4. As the fixed occuption method used and only the gamma point is considered, the scf will not be converged for unlocalized systems. But for localized systems, the scf can converge easily
 
 
 ---------------------------------------------------------------------
