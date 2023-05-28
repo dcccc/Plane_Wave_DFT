@@ -2,11 +2,11 @@
 
 ## Plane Wave DFT
 
-A plane-wave basis DFT code, which writed with python. This code is translated from the julia code by f-fathurrahman[1], and the purpose is to get a better understanding about plane-wave basis DFT method.
+A plane-wave basis DFT code, which is written with python. This code is translated from the julia code by f-fathurrahman[1], and the purpose is to get a better understanding about plane-wave basis DFT method.
 
 ## How To Run
 
-A sample input file for the calculation of a ch4 molecule in box is as below
+A sample input file for the calculation of a ch4 molecule in a box is as below
 
 ```
 e_cut 15
@@ -24,16 +24,16 @@ H      0.4140015244     0.6047569793      0.5961894333
 
 ```
 
-The first line of input text is the wavefunction cutoff energy parameter, the default value is 15.0 Hatree. If this line is omitted, the default value 15 Hartree will be used.
+The first line of input text is the wavefunction cutoff energy parameter, the default value is 15.0 Hartree. If this line is omitted, the default value 15 Hartree will be used.
 
-The second line is the number of states you want to calculate, if the parameter is 0, not setted, or the value is smaller then the half of the total electron number, an integer of no samller than half of the total electrons number will be used.
+The second line is the number of states you want to calculate. if the parameter is 0, not set, or the value is smaller than the half of the total electron number, an integer of no smaller than half of the total electrons number will be used.
 
-4th to 6th line is the box lattice, and unit is Bohr
+4th to 6th line is the box lattice parameter, and unit is Bohr
 
-8th to end line is the atom symbols and their fraction coordinates
+8th to final line are the atom symbols and corresponding fraction coordinates
 
 
-When the input file is ready, we can ennter the source directory and run the calculation
+When the input file is ready, we can enter into the source directory and run the calculation
 
 ```bash
 python pwdft.py CH4.txt
@@ -44,31 +44,30 @@ Then the output text will be printed on the screen.
 
 
 
-## Result Compared With CP2k
+## Result Compared with CP2k
 
-Total energy of CH4 sample calculation is -6.16333698 Hatree, which is same with the result by cp2k. The ch4 input file for cp2k is also included in the example directory.
+Total energy of CH4 example calculation is -6.16333698 Hartree, which is same to the result by cp2k. The ch4 input file for cp2k is also included in the example directory.
 
-In the calculaiton of ch4 example, we use the simplest functional, the xalpha[2], and psuedopotential is norm-conserving potential[3]
+In the calculation of ch4 example, we use the simplest xalpha[2] functional, and the pseudopotential is norm-conserving potential[3]
 
 
 ## Possible Bugs
 
 
-1. As to norm-conserving potential, the default cutoff energy of 15.0 Hatree is too small, so the calculation for the example ch4 is not acurrate enough
+1. As to norm-conserving potential, the default cutoff energy of 15.0 Hartree is too less, so the calculation for the example ch4 is not accurate enough
 
-2. Only few sample cases are tested, example with elements of larger atom number are not tested, so there may be some wrong result for those elements
+2. Only few sample cases are tested, tasks with elements of larger atom number are not tested, so there may be some wrong results for them
 
-3. The code is pure python and not optimized, so calcualtion may be Unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
+3. The code is pure python and not optimized, so calculation may be unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
 
-4. As the fixed occuption method used and only the gamma point is considered, the scf will not be converged for unlocalized systems. But for localized systems, the scf can converge easily
+4. As the fixed occupation method used and only the gamma point is considered, the scf will not be converged for delocalized systems. But for localized systems, the scf can converge easily
 
 
 ---------------------------------------------------------------------
 
 ## 平面波密度泛函方法
 
-使用平面波基组的密度泛函方法实现代码，代码使用python写成，翻译自f-fathurrahman的Julia[1]实现。主要还在于加深对平面波
-方法的理解。
+使用平面波基组的密度泛函方法实现代码，代码使用python写成，翻译自f-fathurrahman的Julia[1]实现。主要还在于加深对平面波方法的理解。
 
 
 ## 使用方法
@@ -105,12 +104,12 @@ H      0.4140015244     0.6047569793      0.5961894333
 python pwdft.py CH4.txt
 ```
 
-输出便会打印界面上
+输出便会打印在输出界面上
 
 
 ## 计算结果对比
 
-上面CH4示例代码计算的总能量为-6.16333698 Hatree，cp2k计算的结果为 -6.16333698 Hatree， 两者一致。具体输入和结果文件如example文件夹中文件。
+上面CH4示例代码计算的总能量为-6.16333698 Hartree，cp2k计算的结果为 -6.16333698 Hartree，两者一致。具体输入和结果文件如example文件夹中文件。
 
 计算使用的泛函仍旧是最简单的xalpha泛函[2]，赝势是模守恒赝势[3]
 
@@ -123,7 +122,7 @@ python pwdft.py CH4.txt
 
 3. 代码纯粹使用python写成，没有优化速度，计算速度较慢，因此无法计算一些较大的体系。实际的计算应当使用quantum espresso这一类成熟的计算软件
 
-4. 由于仅能使用固定占据方法，不考虑电子自旋的情况下，计算gamma点的能量， 对于离域行稍强的体系计算可能会不收敛，而对于定域性较强的体系可能较容易收敛一些。
+4. 由于仅能使用固定占据方法，不考虑电子自旋的情况下，计算gamma点的能量， 对于离域性稍强的体系计算可能会不收敛，而对于定域性较强的体系可能较容易收敛一些。
 
 
 ## 参考资料
