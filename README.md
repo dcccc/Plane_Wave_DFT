@@ -132,4 +132,4 @@ python pwdft.py CH4.txt
 
 [2]  J. C. Slater, Phys. Rev. 81, 385 (1951) 
 
-[3]  https://github.com/juerghutter/GTH
+[3]  https://github.com/juerghutter/GTH, and the converted verison for quantum espresso is from https://pseudopotentials.quantum-espresso.org/legacy_tables/hartwigesen-goedecker-hutter-pp
