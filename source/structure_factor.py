@@ -24,7 +24,7 @@ def get_struct_factor(input, g_vector):
         struct_factor[i] = 0.
     
     for n in range(len(atom_symbol)):
-        tmp_sf = np.zeros((grid_point[0], grid_point[1], grid_point[2]), dtype = np.complex)
+        tmp_sf = np.zeros((grid_point[0], grid_point[1], grid_point[2]), dtype = np.complex128)
         tmp_sym = atom_symbol[n]        
         for i in range(grid_point[0]):
             for j in range(grid_point[1]):

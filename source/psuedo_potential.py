@@ -29,7 +29,7 @@ def cal_ps_vloc_r(ps, g_vector, input, struct_factor):
     
     n_point = np.prod(grid_point)
     
-    ps_v_loc_g = np.zeros(grid_point, dtype=np.complex)
+    ps_v_loc_g = np.zeros(grid_point, dtype=np.complex128)
     
     pre1 = -4. * np.pi * ps.zval
     pre2 = (8.0 * np.pi**3)**0.5 * ps.r_loc**3
@@ -222,7 +222,7 @@ def get_ps_vnloc_g(input, g_vector, ps_list):
             for m in range(-l , l+1):            # 每个伸展方向
                 tmp_iprj = []
                 for iprj in range(1, ps.n_proj[l] + 1): # 每个投影算符     
-                    tmp_m = np.zeros(grid_point, dtype = np.complex)
+                    tmp_m = np.zeros(grid_point, dtype = np.complex128)
     
                     for ii in range(grid_point[0]):
                         for jj in range(grid_point[1]):

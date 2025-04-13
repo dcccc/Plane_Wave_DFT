@@ -5,7 +5,15 @@ from scipy import special
 
 from wavefunction_density import *
 from cal_E import *
-from potential import *
+# from potential import *
+from hamiltionian import *
+
+try:
+    import pylibxc
+    libxc_installed = True
+except:
+    print("pylibxc is not installed!")
+    libxc_installed = False
 
 
 # 计算能量
@@ -23,13 +31,35 @@ def cal_kinetic_e(psi_g, g2_vector, state_occupy_list ):
 
 # xalpha XC能
 
-def cal_E_xc(rho_r, vol , n_point):
-    
-    alpha = 2. / 3.
+def cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=[]):
+    rho_r, rho_grad_r, kden, rho_lapl = rho_value
+    is_need_tau = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_TAU  for xc in libxc]) 
+    is_need_lap = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_LAPLACIAN  for xc in libxc]) 
+    is_gga = np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_GGA  for xc in libxc])
 
-    E_xc = -9./8.* alpha * np.cbrt(3./ np.pi) * np.sum( rho_r**(4./3.))
-    
-    E_xc = E_xc * vol / n_point * 0.5
+    E_xc = 0.0
+    shape = rho_r.shape
+    inp = {}
+    if libxc != [] and libxc_installed:
+        inp["rho"] = np.ascontiguousarray(rho_r.reshape((-1,)))
+        if is_gga or is_need_lap or is_need_tau :
+            rho_grad_r_x , rho_grad_r_y , rho_grad_r_z = rho_grad_r 
+            rho_grad_r_total = rho_grad_r_x**2 + rho_grad_r_y**2 + rho_grad_r_z**2
+            inp["sigma"] = np.ascontiguousarray(rho_grad_r_total.reshape((-1,)))
+
+        if is_need_tau:
+           inp["tau"] = np.ascontiguousarray(kden.reshape((-1,)))
+        if is_need_lap:
+            inp["lapl"] = np.ascontiguousarray(rho_lapl.reshape((-1,)))
+
+        for xc in libxc:   
+            res = xc.compute(inp, do_exc=True, do_vxc=False)
+            E_xc += np.sum(res['zk'].reshape(shape) * rho_r)* vol / n_point 
+  
+    else:
+        alpha = 2. / 3.
+        E_xc = -9./8.* alpha * np.cbrt(3./ np.pi) * np.sum( rho_r**(4./3.))    
+        E_xc = E_xc * vol / n_point * 0.5
     
     return(E_xc)
 
@@ -101,7 +131,7 @@ def cal_E_ps_nloc(beta_nl, psi_g, ps_list, atom_symbol, state_occupy_list):
             ps = ps_list[atom_symbol[i]]
             for l in range(0, ps.l_max):  #每个层            
                 for m in range(-l , l+1):            # 每个伸展方向
-                    tmp_beta_psi = np.zeros(ps.n_proj[l], dtype = np.complex)
+                    tmp_beta_psi = np.zeros(ps.n_proj[l], dtype = np.complex128)
                     for iprj in range(0, ps.n_proj[l] ):
                         tmp_beta_psi[iprj] = np.sum(np.conj(beta_nl[i][l][m+l][iprj]) * psi)
                     
@@ -200,7 +230,7 @@ def cal_ewald_sum(atom_pos, latt9, rec_latt, atom_charge):
 
 # 总能
 
-def cal_E_total(psi_g, V_loc_r, beta_nl, input, g_vector):
+def cal_E_total(psi_g_3d, V_loc_r, rho_value, beta_nl, input, g_vector, libxc):
     
 	
     state_occupy_list = input.state_occupy_list
@@ -225,17 +255,17 @@ def cal_E_total(psi_g, V_loc_r, beta_nl, input, g_vector):
 	
     n_point    = np.prod(grid_point)
     
-    rho_r      = cal_rhoe(psi_g,  vol, state_occupy_list, grid_point)
+    rho_r      = cal_rhoe(psi_g_3d,  vol, state_occupy_list, grid_point)
 
-    E_kinectic = cal_kinetic_e(psi_g, g2_vector, state_occupy_list )
+    E_kinectic = cal_kinetic_e(psi_g_3d, g2_vector, state_occupy_list )
 
-    E_xc       = cal_E_xc(rho_r, vol , n_point)
+    E_xc       = cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=libxc) 
     
     E_hatree   = cal_E_hatree(rho_r, g2_vector, g_vector_mask.copy(), vol, n_point, grid_point)    
     
     E_loc      = cal_E_loc(V_loc_r, rho_r, g2_vector, g_vector_mask, vol, n_point )
     
-    E_ps_nl    = cal_E_ps_nloc(beta_nl, psi_g, ps_list, atom_symbol, state_occupy_list) 
+    E_ps_nl    = cal_E_ps_nloc(beta_nl, psi_g_3d, ps_list, atom_symbol, state_occupy_list) 
     
     E_pscore   = cal_pspcore_E(atom_symbol, atom_charge, ps_list, vol)
     

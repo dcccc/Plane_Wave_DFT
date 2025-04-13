@@ -123,8 +123,8 @@ class Input(object):
         input_line = open(input_file, "r").readlines()
         
         # read setting parameter for wavefunction cutoff energy 
-        for i in range(3):
-            line_split = input_line[i].split()
+        for i in range(4):
+            line_split = input_line[i].strip().split()
             if len(line_split) == 0:
                 n_line = i
                 break
@@ -141,6 +141,12 @@ class Input(object):
                 self.n_state_all = int(input_line[1].split()[-1])                
             elif line_split[0] != "n_state" and i > 2:
                 self.n_state_all = 0
+
+            # read xc functional
+            if line_split[0] == "xc" :
+                self.xc = line_split[1:]
+            else:
+                self.xc = [] 
                 
         
         self.rho_cutoff  =  self.wf_cutoff * 4.
@@ -150,7 +156,7 @@ class Input(object):
         if n_line == 0:
             n_line = -1
             
-        self.latt9 = np.array([i.split()  for i in input_line[n_line+1:n_line+4]], dtype=np.float)
+        self.latt9 = np.array([i.split()  for i in input_line[n_line+1:n_line+4]], dtype=np.float64)
         
         self.rec_latt = 2. * np.pi * np.linalg.inv(self.latt9).T
         
@@ -168,7 +174,7 @@ class Input(object):
             elif len(tmp_line) ==0:
                 break
         
-        self.frac_coord = np.array(self.frac_coord, dtype=np.float)        
+        self.frac_coord = np.array(self.frac_coord, dtype=np.float64)        
         self.coord  = np.dot(self.frac_coord, self.latt9)
         
         

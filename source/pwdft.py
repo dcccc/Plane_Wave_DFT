@@ -9,6 +9,13 @@ from diag import *
 from scf import *
 from cal_E import *
 
+try:
+    import pylibxc
+    libxc_installed = True
+except:
+    print("pylibxc is not installed!")
+    libxc_installed = False
+
 from sys import argv
 
 
@@ -69,15 +76,24 @@ struct_factor = get_struct_factor(input, g_vector)
 
 print("\n") 
 
-print("Eelectron Wavefunction Cutoff Energy : % 6.2f ( Hatre )"  %(input.wf_cutoff))
-print("Eelectron Density Cutoff Energy      : % 6.2f ( Hatre )"  %(input.wf_cutoff*4))
+print("Eelectron Wavefunction Cutoff Energy : % 6.2f ( Hatree )"  %(input.wf_cutoff))
+print("Eelectron Density Cutoff Energy      : % 6.2f ( Hatree )"  %(input.wf_cutoff*4))
 # print("\n") 
-print("Eelectron Wavefunction Cutoff Energy : % 6.2f ( Hatre )"  %(input.wf_cutoff))
+print("Eelectron Wavefunction Cutoff Energy : % 6.2f ( Hatree )"  %(input.wf_cutoff))
 print("Reciprocal Grid Point Number         :   %d    %d    %d"  %(input.grid_point))
 print("Wavefunction Point number            :   %d            "  %(np.sum(g_vector.n_gxw)))
 print("Reciprocal Point number              :   %d             " %(np.sum(g_vector.n_gw)))
 print("\n")
-print("XC functional                        :   Slater X alpha (J. C. Slater, Phys. Rev. 81, 385 (1951) ) " )
+libxc = []
+xc_name = input.xc
+if len(xc_name) > 0 and libxc_installed:
+    print("XC functional                        :" )
+    for i in xc_name:
+        xc = pylibxc.LibXCFunctional(i, "unpolarized")
+        print(xc.describe())
+        libxc.append(xc)
+else:
+    print("XC functional                        :   Slater X alpha (J. C. Slater, Phys. Rev. 81, 385 (1951) ) " )
 
 
 
@@ -117,7 +133,7 @@ print("\n\n")
 print("Start Self Consistent Field Calculation : ")
 print("----------------------------------------------------------------------------------")
 
-eval_final, psi_final, rho_final, E_pw, is_converged = scf(V_loc_r, init_psi_g_3d, init_rho_r, beta_nl, g_vector, input)
+eval_final, psi_final, rho_final, E_pw, is_converged = scf(V_loc_r, init_psi_g_3d, init_rho_r, beta_nl, g_vector, input, libxc)
 
 
 
@@ -136,7 +152,7 @@ print("E_kinectic  =  %12.8f (Hatree)"%(E_pw[0]))
 print("E_xc        =  %12.8f (Hatree)"%(E_pw[1]))
 print("E_hatree    =  %12.8f (Hatree)"%(E_pw[2]))
 print("E_loc       =  %12.8f (Hatree)"%(E_pw[3]))
-print("E_noc       =  %12.8f (Hatree)"%(E_pw[4]))
+print("E_nloc      =  %12.8f (Hatree)"%(E_pw[4]))
 print("E_pspcore   =  %12.8f (Hatree)"%(E_pw[5]))
 print("E_NN        =  %12.8f (Hatree)"%(E_pw[6]))
 print("E_total     =  %12.8f (Hatree)"%(np.sum(E_pw)))

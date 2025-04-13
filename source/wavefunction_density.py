@@ -25,7 +25,7 @@ def get_init_wf(n_state_all, n_gxw, gx_vector_mask, grid_point):
     
     for i in range(n_state_all):
     
-        psi_g_tmp  = np.zeros(grid_point, dtype = np.complex)
+        psi_g_tmp  = np.zeros(grid_point, dtype = np.complex128)
     
         psi_g_tmp[gx_vector_mask] = psi_g_1d[i]
         psi_g_3d.append(psi_g_tmp)                    
@@ -60,5 +60,60 @@ def cal_rhoe(psi_g_3d, vol, state_occupy_list, grid_point):
 
     return(rho_r_all)
 
-	
-	
+
+def nabla_dot(hx,hy,hz, g1_vector):
+    hx_g = np.fft.fftn(hx)
+    hy_g = np.fft.fftn(hy)
+    hz_g = np.fft.fftn(hz)
+    h_div = hx_g * g1_vector[:,:,:,0] + hy_g * g1_vector[:,:,:,1] + hz_g * g1_vector[:,:,:,2]
+    h_div_r = np.real(np.fft.ifftn(h_div*1.j))
+    return(h_div_r)
+
+
+def cal_knetic_density(psi_g_3d, g1_vector, vol, state_occupy_list): 
+    "tau"
+    n_point   = np.prod(psi_g_3d[0].shape)
+    scale     = n_point / vol**0.5
+    kden      = np.zeros(psi_g_3d[0].shape)
+    
+
+    for i, ratio in enumerate(state_occupy_list):        
+        if ratio > 0.0:
+            psi_g = psi_g_3d[i]
+            dx = psi_g * g1_vector[:,:,:,0] * 1.j
+            dy = psi_g * g1_vector[:,:,:,1] * 1.j
+            dz = psi_g * g1_vector[:,:,:,2] * 1.j
+            dx_r = np.fft.ifftn(dx)*scale
+            dy_r = np.fft.ifftn(dy)*scale
+            dz_r = np.fft.ifftn(dz)*scale
+
+            kden = kden + np.real(dx_r * np.conj(dx_r) + dy_r * np.conj(dy_r) + dz_r * np.conj(dz_r))    
+
+    return(kden)
+
+
+def cal_rhoe_grad(rho_all, g1_vector): 
+    
+    rho_g = np.fft.fftn(rho_all)
+
+    rho_grad_r_x = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,0] * 1.j))
+    rho_grad_r_y = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,1] * 1.j))
+    rho_grad_r_z = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,2] * 1.j))
+
+
+    # rho_lap_r_x = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,0]**2 * -1.))
+    # rho_lap_r_y = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,1]**2 * -1.))
+    # rho_lap_r_z = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,2]**2 * -1.))
+
+    # rho_lap_r = rho_lap_r_x + rho_lap_r_y + rho_lap_r_z
+    return(rho_grad_r_x, rho_grad_r_y, rho_grad_r_z)
+
+def cal_lapl(rho_all, g1_vector): 
+    
+    rho_g = np.fft.fftn(rho_all)
+    rho_lap_r_x = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,0]**2 * -1.))
+    rho_lap_r_y = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,1]**2 * -1.))
+    rho_lap_r_z = np.real(np.fft.ifftn(rho_g * g1_vector[:,:,:,2]**2 * -1.))
+
+    rho_lap_r = rho_lap_r_x + rho_lap_r_y + rho_lap_r_z
+    return(rho_lap_r)

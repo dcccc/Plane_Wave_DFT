@@ -1,0 +1,16 @@
+ &control
+    calculation = 'scf',pseudo_dir="./", disk_io="none"
+ /
+ &system    
+    ibrav=  1, celldm(1) =16, nat=  2, ntyp= 1,
+    ecutwfc =30.0,  nbnd = 5,
+    input_dft='xc-000i-006l-000i-000i-000i-000i',
+ /
+ &electrons
+ /
+ATOMIC_SPECIES
+ H  1.0  H.pbe-hgh.UPF
+ATOMIC_POSITIONS (crystal)
+H     -0.04369991753235     0.0   0.0 
+H      0.04369991753235     0.0   0.0 
+K_POINTS gamma
