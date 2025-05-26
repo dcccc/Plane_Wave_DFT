@@ -1,6 +1,6 @@
 # README.md
 
-**Read this in other languages: [English](README.md), [中文](README_zh.md).**
+Read this in other languages: [中文](README_zh.md).
 
 ## Plane Wave DFT
 
@@ -31,7 +31,7 @@ The first line of input text is the wavefunction cutoff energy parameter, the de
 
 The second line is the number of states you want to calculate. if the parameter is 0, not set, or the value is smaller than the half of the total electron number, an integer of no smaller than half of the total electrons number will be used.
 
-The 3rd line is the functional names in libxc[] used in the calculation. If not set or pylibxc not installed, the default xalpha[2] will be used.
+The 3rd line is the functional names in libxc[2] used in the calculation. If not set or pylibxc not installed, the default xalpha[3] will be used.
 
 5th to 7th line is the box lattice parameter, and unit is Bohr
 
@@ -49,11 +49,11 @@ Then the output text will be printed on the screen.
 
 
 
-## Result Compared with CP2k
+## Result Compared with CP2K and quantum espresso
 
-Total energy of CH4 example calculation is -6.16333698 Hartree, which is same to the result by cp2k. The ch4 input file for cp2k is also included in the example directory.
+Total energy of CH4 example calculation is -6.16333698 Hartree, which is same to the result by cp2k. The ch4 input file for cp2k is also included in the example directory. Some other calculations results by quantum espresso is also provided for comparison.
 
-In the calculation of ch4 example, we use the defualt simplest xalpha[2] functional, and the pseudopotential is norm-conserving potential[3]
+In the calculation of ch4 example, we use the defualt simplest xalpha[3] functional, and the pseudopotential is HGH norm-conserving potential[4]
 
 
 ## Possible Bugs
@@ -61,9 +61,19 @@ In the calculation of ch4 example, we use the defualt simplest xalpha[2] functio
 
 1. As to norm-conserving potential, the default cutoff energy of 15.0 Hartree is too less, so the calculation for the example ch4 is not accurate enough
 
-2. Only few sample cases are tested, tasks with elements of larger atom number are not tested, so there may be some wrong results for them
+2. Only few sample cases are tested, tasks with elements of larger atom number are not tested. So there may be some wrong results for them
 
-3. The code is pure python and not optimized, so calculation may be unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
+3. The code is pure python and not optimized, and calculation may be unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
 
-4. As the fixed occupation method used and only the gamma point is considered, the scf will not be converged for delocalized systems. But for localized systems, the scf can converge easily
+4. As the fixed occupation method used here, and only the gamma point is considered. The scf will not be converged for delocalized systems. But for localized systems, the scf can converge easily
 
+## Reference
+
+
+[1]  https://github.com/f-fathurrahman/PWDFT.jl
+
+[2]  https://gitlab.com/libxc/libxc
+
+[3]  J. C. Slater, Phys. Rev. 81, 385 (1951) 
+
+[4]  https://github.com/juerghutter/GTH, and the converted verison for quantum espresso is from https://pseudopotentials.quantum-espresso.org/legacy_tables/hartwigesen-goedecker-hutter-pp

@@ -1,0 +1,18 @@
+ &control
+    calculation = 'scf',pseudo_dir="./", disk_io="none",prefix='N2',
+ /
+ &system    
+    ibrav=  1, celldm(1) =16, nat=  2, ntyp= 1,
+    ecutwfc =30.0, ecutrho=120, nbnd = 5,nosym=.true.,
+    input_dft='xc-000i-000i-000i-000i-497l-498l',
+ /
+ &electrons
+ /
+ATOMIC_SPECIES
+ N  14.0  N.pbe-hgh.UPF
+ATOMIC_POSITIONS (crystal)
+N    -0.073817426775     0.0   0.0 
+N     0.073817426775     0.0   0.0 
+K_POINTS crystal
+1
+ 0.0  0.0  0.0  1.0

@@ -27,22 +27,22 @@ def cal_V_hatree(rho_r, g2_vector, grid_point):
     return(V_hatree_r)
 
 # 计算XC势
-
-
 def cal_V_tau(vtau, psi_g_3d, g1_vector):
     "计算动能势"
-    V_tau = 0. + 0.j
+    V_tau = np.zeros(psi_g_3d.shape, dtype = np.complex128)
     if not isinstance(vtau, str):
-        for psi_g in psi_g_3d:
+        for n, psi_g in enumerate(psi_g_3d):
             dx_r = np.fft.ifftn(g1_vector[:,:,:,0] * psi_g * 1.j)
-            dy_r = np.fft.ifftn(g1_vector[:,:,:,1] * psi_g * 1.j) 
+            dy_r = np.fft.ifftn(g1_vector[:,:,:,1] * psi_g * 1.j)
             dz_r = np.fft.ifftn(g1_vector[:,:,:,2] * psi_g * 1.j)
         
             dx_g = np.fft.fftn(dx_r * vtau) * g1_vector[:,:,:,0] * 1.j
             dy_g = np.fft.fftn(dy_r * vtau) * g1_vector[:,:,:,1] * 1.j
             dz_g = np.fft.fftn(dz_r * vtau) * g1_vector[:,:,:,2] * 1.j
+            
+            V_tau[n] = - 0.5*(dx_g + dy_g + dz_g)
 
-        V_tau = V_tau - 0.5*(dx_g + dy_g + dz_g)  
+    
     return(V_tau)
 
 
@@ -69,7 +69,6 @@ def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = []
 
         if is_need_tau:
             inp["tau"] = np.ascontiguousarray(kden.reshape((-1,)))
-            vtau  = 0.0
         else:
             vtau = "none"
         if is_need_lap:
@@ -79,20 +78,20 @@ def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = []
             res = xc.compute(inp, do_exc=False, do_vxc=True)
             V_xc += res['vrho'].reshape(shape)
 
-            if is_gga:
+            if is_gga or is_need_lap or is_need_tau:
                 vsigma = res['vsigma'].reshape(shape)
-
                 hx = vsigma * rho_grad_r_x
                 hy = vsigma * rho_grad_r_y
                 hz = vsigma * rho_grad_r_z
-                V_xc = V_xc  -2.0*nabla_dot(hx,hy,hz, g1_vector)
+                V_xc = V_xc  - 2.0*nabla_dot(hx,hy,hz, g1_vector)
 
 
             if is_need_tau:
                 vtau += res['vtau'].reshape(shape)
-            if is_need_lap:
+            if is_need_lap :
                 vlapl = res['vlapl'].reshape(shape)
-                V_xc = V_xc - np.fft.ifftn(np.fft.fftn(vlapl)*g2_vector)
+                vlapl[np.isnan(vlapl)] = 0.0
+                V_xc = V_xc - np.real(np.fft.ifftn(np.fft.fftn(vlapl)*g2_vector))
 
     else:
         alpha = 2. / 3.
@@ -161,7 +160,7 @@ def op_V_loc(psi_g_3d, V_loc_r):
 
 def op_H(V_loc_r, V_xc_all, psi_g_3d, rho_r, beta_nl, g2_vector, g1_vector, grid_point, ps_list, atom_symbol, vol, state_occupy_list):
      
-    V_loc_r = cal_hamiltionian(V_loc_r, psi_g_3d, rho_r, grid_point, g2_vector, g1_vector, vol, state_occupy_list)
+    V_loc_r0 = cal_hamiltionian(V_loc_r, psi_g_3d, rho_r, grid_point, g2_vector, g1_vector, vol, state_occupy_list)
     V_ps_nloc  = cal_V_ps_nloc(beta_nl, psi_g_3d, ps_list, atom_symbol, grid_point)
     
 
@@ -174,12 +173,10 @@ def op_H(V_loc_r, V_xc_all, psi_g_3d, rho_r, beta_nl, g2_vector, g1_vector, grid
     op_k_g  = cal_op_k(psi_g_3d, g2_vector)     
     
     # 计算倒空间中的局域算符
-    op_v_loc_g = op_V_loc(psi_g_3d, V_loc_r + V_xc_r)
+    op_v_loc_g = op_V_loc(psi_g_3d, V_loc_r0 + V_xc_r)
     
-    op_H_g = op_k_g + op_v_loc_g + V_ps_nloc + op_tau 
+    op_H_g = op_k_g + op_v_loc_g + V_ps_nloc + op_tau
 
-    # op_H_g[:, 30,30,30]= np.real(op_H_g[:,30,30,30]) + 0.0j
-    
     return(op_H_g)
     
     

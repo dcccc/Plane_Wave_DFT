@@ -1,6 +1,6 @@
 e_cut 15
 n_state  0
-xc GGA_X_PBE  GGA_C_PBE
+xc MGGA_X_R2SCAN  MGGA_C_R2SCAN
 
 16.0 0.0 0.0
 0.0 16.0 0.0

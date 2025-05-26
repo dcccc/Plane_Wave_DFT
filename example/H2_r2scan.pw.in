@@ -3,14 +3,17 @@
  /
  &system    
     ibrav=  1, celldm(1) =16, nat=  2, ntyp= 1,
-    ecutwfc =30.0,  nbnd = 1,
-    input_dft='xc-000i-000i-101l-130l-000i-000i',
+    ecutwfc =30.0,  nbnd = 1,nosym=.true.,
+    input_dft='xc-000i-000i-000i-000i-497l-498l',
  /
  &electrons
  /
 ATOMIC_SPECIES
- H  1.0  H.pbe-hgh.UPF
+ H   1.0  H.pbe-hgh.UPF
 ATOMIC_POSITIONS (crystal)
 H       0.4531250003       0.4999999994       0.4999999994
 H       0.5468749996       0.4999999994       0.4999999994
-K_POINTS gamma
+K_POINTS crystal
+1
+ 0.0  0.0  0.0  1.0
+

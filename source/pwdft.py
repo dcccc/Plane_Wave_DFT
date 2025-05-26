@@ -98,11 +98,7 @@ else:
 
 
 V_loc_r = get_ps_vloc_r(ps_list, g_vector, input, struct_factor) 
-
 beta_nl = get_ps_vnloc_g(input, g_vector, ps_list)
-
-
-
 
 
 state_occupy_list = input.state_occupy_list
@@ -127,7 +123,21 @@ g_vector_mask  = g_vector.g_vector_mask
 
 init_psi_g_3d = get_init_wf(len(state_occupy_list), n_gxw, gx_vector_mask, grid_point)
 
-init_rho_r  = cal_rhoe(init_psi_g_3d, vol, state_occupy_list, grid_point)
+# init_rho_r  = cal_rhoe(init_psi_g_3d, vol, state_occupy_list, grid_point)
+N_electron = sum(input.atom_charge)
+init_rho_r  =guess_rhoe(struct_factor, g2_vector, gx_vector_mask, atom_symbol, grid_point, ps_list, vol, N_electron  )
+
+
+# when xc functional is MGGA, using the pbe fuctional results wavefuntion as the initial guess
+is_need_tau = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_TAU  for xc in libxc]) 
+is_need_lap = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_LAPLACIAN  for xc in libxc])
+if is_need_tau > 0 or is_need_lap > 0 :
+    print("\n\n")
+    print("xc functionals is MGGA, using the pbe fuctional results wavefuntion as the initial guess")
+    print("Start PBE Self Consistent Field Calculation : ")
+    pbe = [pylibxc.LibXCFunctional(i, "unpolarized") for i in ["GGA_X_PBE", "GGA_C_PBE"]]
+    eval_final, psi_final, rho_final, E_pw, is_converged = scf(V_loc_r, init_psi_g_3d, init_rho_r, beta_nl, g_vector, input, pbe)
+    init_psi_g_3d = psi_final
 
 print("\n\n")
 print("Start Self Consistent Field Calculation : ")

@@ -45,17 +45,19 @@ def cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=[]):
         if is_gga or is_need_lap or is_need_tau :
             rho_grad_r_x , rho_grad_r_y , rho_grad_r_z = rho_grad_r 
             rho_grad_r_total = rho_grad_r_x**2 + rho_grad_r_y**2 + rho_grad_r_z**2
+            # print("rho_grad_r", rho_grad_r_total[:,0,0])
             inp["sigma"] = np.ascontiguousarray(rho_grad_r_total.reshape((-1,)))
 
         if is_need_tau:
            inp["tau"] = np.ascontiguousarray(kden.reshape((-1,)))
+
         if is_need_lap:
             inp["lapl"] = np.ascontiguousarray(rho_lapl.reshape((-1,)))
 
         for xc in libxc:   
             res = xc.compute(inp, do_exc=True, do_vxc=False)
             E_xc += np.sum(res['zk'].reshape(shape) * rho_r)* vol / n_point 
-  
+        # print('vsigma', res['vsigma'].reshape((60,60,60))[:,0,0])
     else:
         alpha = 2. / 3.
         E_xc = -9./8.* alpha * np.cbrt(3./ np.pi) * np.sum( rho_r**(4./3.))    

@@ -1,6 +1,6 @@
 # README.md
 
-**Read this in other languages: [English](README.md), [中文](README_zh.md).**
+**Read this in other languages: [English](README.md).**
 
 ## 平面波密度泛函方法
 
@@ -32,7 +32,8 @@ H      0.4140015244     0.6047569793      0.5961894333
 
 第二行设定需要计算的态或者轨道的数量，设为0或者没有这一行的设定，以及设定数量小于价体系电子数的一半，则默认使用大于或者等于价电子数量一半的最小整数值
 
-第三行设定使用泛函名称设定使用的libxc中的泛函方法，未安装pylibxc或者未设定该参数则默认使用xalpha泛函[2]
+第三行设定使用泛函名称设定使用的libxc中的泛函方法，未安装pylibxc[2]或者未设定该参数则默认使用xalpha泛函[3]
+
 
 第五行到第七行设定晶格常数，单位为Bohr
 
@@ -49,20 +50,20 @@ python pwdft.py CH4.txt
 
 ## 计算结果对比
 
-上面CH4示例代码计算的总能量为-6.16333698 Hartree，cp2k计算的结果为 -6.16333698 Hartree，两者一致。具体输入和结果文件如example文件夹中文件。
+上面CH4示例代码计算的总能量为-6.16333698 Hartree，cp2k计算的结果为 -6.16333698 Hartree，两者一致。具体输入和结果文件如example文件夹中文件。quantum espresso计算示例也已经添加，可以作为参考对比
 
-计算使用的默认泛函仍旧是最简单的xalpha泛函[2]，赝势是模守恒赝势[3]
+计算使用的默认泛函仍旧是最简单的xalpha泛函[3]，赝势是模守恒赝势[4]
 
 
 ## 可能存在的问题
 
-1. 代码使用的是gth模守恒赝势[3]，默认的15.0 Hatree 较小，因此计算准确度不高
+1. 代码使用的是HGH模守恒赝势[3]，并且默认的截断能15.0 Hatree 较小，因此计算准确度不高
 
 2. 目前仅测试对比了少数几个结果的计算结果，也没有测试原子系数更大的元素体系，因此可能存在一些元素计算结果不对的情况
 
 3. 代码纯粹使用python写成，没有优化速度，计算速度较慢，因此无法计算一些较大的体系。实际的计算应当使用quantum espresso这一类成熟的计算软件
 
-4. 由于仅能使用固定占据方法，不考虑电子自旋的情况下，计算gamma点的能量， 对于离域性稍强的体系计算可能会不收敛，而对于定域性较强的体系可能较容易收敛一些。
+4. 由于仅能使用固定占据方法，不考虑电子自旋的情况下，计算gamma点的能量，对于离域性稍强的体系计算可能会不收敛，而对于定域性较强的体系可能较容易收敛一些
 
 
 ## 参考资料
@@ -70,6 +71,8 @@ python pwdft.py CH4.txt
 
 [1]  https://github.com/f-fathurrahman/PWDFT.jl
 
-[2]  J. C. Slater, Phys. Rev. 81, 385 (1951) 
+[2]  https://gitlab.com/libxc/libxc
 
-[3]  https://github.com/juerghutter/GTH, and the converted verison for quantum espresso is from https://pseudopotentials.quantum-espresso.org/legacy_tables/hartwigesen-goedecker-hutter-pp
+[3]  J. C. Slater, Phys. Rev. 81, 385 (1951) 
+
+[4]  https://github.com/juerghutter/GTH, and the converted verison for quantum espresso is from https://pseudopotentials.quantum-espresso.org/legacy_tables/hartwigesen-goedecker-hutter-pp
