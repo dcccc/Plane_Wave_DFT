@@ -2,7 +2,7 @@ import numpy as np
 import scipy
 from scipy import linalg
 from scipy import special
-
+import copy
 
 
 # Reciprocal grid point
@@ -18,7 +18,7 @@ class G_vector(object):
     def __init__(self, rec_latt, wf_cutoff, grid_point):
     
         
-    
+        self.grid_point    = grid_point
     
         self.n_gw          = 0
         self.n_point       = np.prod(grid_point)
@@ -44,12 +44,11 @@ class G_vector(object):
     
         self.g_vector_mask =  self.g_vector_mask == 1
 
+        # store the wavefunction g-vectors
 
-        # 波函数倒空间格点
 
-
-        self.gx2_vector     = np.zeros((grid_point[0],grid_point[1],grid_point[2]))
-        self.gx1_vector     = np.zeros((grid_point[0],grid_point[1],grid_point[2],3))
+        self.gx2_vector     = np.zeros(grid_point, dtype = np.float64)
+        self.gx1_vector     = np.zeros((grid_point[0],grid_point[1],grid_point[2],3),dtype = np.float64)
 
         self.gx_vector_mask = np.logical_and( self.g2_vector <= 2.* wf_cutoff,  self.g2_vector >= 0.)
 
@@ -59,4 +58,20 @@ class G_vector(object):
         self.gx2_vector[self.gx_vector_mask]     =  self.g2_vector[self.gx_vector_mask]
 
         self.g2_vector[self.g2_vector == -1 ] = 0
+        # print("g2_min", np.min(self.g2_vector[self.g_vector_mask>0.]))
     
+
+    def cal_op_coul(self, beta = 0.0 ):
+        self.op_coul  = np.zeros(self.grid_point, dtype = np.float64)
+        self.op_coul[self.g_vector_mask]  = self.g2_vector[self.g_vector_mask]
+
+        self.op_coul[0,0,0] = 1.0  # avoid divied by zero
+        self.op_coul[self.g_vector_mask]= 4 * np.pi / self.op_coul[self.g_vector_mask]
+        self.op_coul[0,0,0] = 0.0
+
+        if beta > 0.0 :
+            self.op_coul[self.g_vector_mask] = self.op_coul[self.g_vector_mask] *(1.0 - \
+                                                np.exp(-self.g2_vector[self.g_vector_mask]/(4*beta**2)))
+            # when g->0 , 4pi(1.0-exp(-|g|^2/4/beta^2))/|g|^2 -> pi/beta^2  (tailor expansion)
+            # which is same to the method in quantum espresso
+            self.op_coul[0,0,0] = np.pi / beta**2

@@ -3,7 +3,7 @@
  /
  &system    
     ibrav=  1, celldm(1) =16, nat=  2, ntyp= 1,
-    ecutwfc =30.0,  nbnd = 1,nosym=.true.,
+    ecutwfc =30.0,  nbnd = 1,  ecutrho=120,
     input_dft='xc-000i-000i-000i-000i-497l-498l',
  /
  &electrons

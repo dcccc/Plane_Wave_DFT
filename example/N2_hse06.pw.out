@@ -1,0 +1,422 @@
+
+     Program PWSCF v.7.3.1 starts on 29Mar2026 at 13:29:18 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI & OpenMP), running on       8 processor cores
+     Number of MPI processes:                 1
+     Threads/MPI process:                     8
+
+     MPI processes distributed on     1 nodes
+     979 MiB available memory on the printing compute node when the environment starts
+ 
+     Waiting for input...
+     Reading input from standard input
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+
+     IMPORTANT: XC functional enforced from input :
+     Exchange-correlation= XC-000I-000I-000I-428L-000I-000I
+                           (   0   0   0 428   0   0   0)
+     EXX-fraction              =        0.25
+     Any further DFT definition will be discarded
+     Please, verify this is what you really want
+
+ 
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+     EXX: q-point mesh:     1    1    1
+     EXX: grid of k+q points same as grid of k-points
+ 
+     G-vector sticks info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Sum        2449    2449    609                91047    91047   11363
+ 
+     Using Slab Decomposition
+ 
+
+
+     bravais-lattice index     =            1
+     lattice parameter (alat)  =      16.0000  a.u.
+     unit-cell volume          =    4096.0000 (a.u.)^3
+     number of atoms/cell      =            2
+     number of atomic types    =            1
+     number of electrons       =        10.00
+     number of Kohn-Sham states=            5
+     kinetic-energy cutoff     =      30.0000  Ry
+     charge density cutoff     =     120.0000  Ry
+     cutoff for Fock operator  =     120.0000  Ry
+     scf convergence threshold =      1.0E-06
+     mixing beta               =       0.7000
+     number of iterations used =            8  plain     mixing
+     Exchange-correlation= XC-000I-000I-000I-428L-000I-000I
+                           (   0   0   0 428   0   0   0)
+     EXX-fraction              =        0.25
+
+     celldm(1)=  16.000000  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.000000   0.000000 )  
+               a(3) = (   0.000000   0.000000   1.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000  0.000000  0.000000 )  
+               b(2) = (  0.000000  1.000000  0.000000 )  
+               b(3) = (  0.000000  0.000000  1.000000 )  
+
+
+     PseudoPot. # 1 for N  read from file:
+     ./N.pbe-hgh.UPF
+     MD5 check sum: 1504e9c56d21d37eacabc67df972de26
+     Pseudo is Norm-conserving, Zval =  5.0
+     Generated in analytical, separable form
+     Using radial grid of 1085 points,  1 beta functions with: 
+                l(1) =   0
+
+     atomic species   valence    mass     pseudopotential
+     N                 5.00    14.00000     N ( 1.00)
+
+     16 Sym. Ops., with inversion, found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1        N      tau(   1) = (  -0.0738174   0.0000000   0.0000000  )
+         2        N      tau(   2) = (   0.0738174   0.0000000   0.0000000  )
+
+     number of k points=     1
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   2.0000000
+
+     Dense  grid:    91047 G-vectors     FFT dimensions: (  60,  60,  60)
+
+     Estimated max dynamical RAM per process >      83.23 MB
+
+     WARNING: libxc functional with ID  428 depends
+      on external parameters: check the user_guide of
+      QE if you need to modify them or to check their
+      default values.
+
+     WARNING: libxc functional with ID  428 is CAM, 
+     long range exx is not available yet (if needed).
+     EXX: ACE will be initialized later
+
+     Initial potential from superposition of free atoms
+
+     starting charge      10.0000, renormalised to      10.0000
+
+     negative rho (up, down):  1.036E-01 0.000E+00
+     Starting wfcs are    8 randomized atomic wfcs
+
+     total cpu time spent up to now is        0.6 secs
+
+     per-process dynamical memory:    17.3 Mb
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.00E-02,  avg # of iterations =  2.0
+
+     negative rho (up, down):  2.382E-02 0.000E+00
+
+     total cpu time spent up to now is        1.2 secs
+
+     total energy              =     -36.37822677 Ry
+     estimated scf accuracy    <       0.30814750 Ry
+
+     iteration #  2     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  3.08E-03,  avg # of iterations =  2.0
+
+     negative rho (up, down):  9.754E-03 0.000E+00
+
+     total cpu time spent up to now is        1.8 secs
+
+     total energy              =     -36.45162835 Ry
+     estimated scf accuracy    <       0.04154148 Ry
+
+     iteration #  3     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  4.15E-04,  avg # of iterations =  2.0
+
+     negative rho (up, down):  4.478E-04 0.000E+00
+
+     total cpu time spent up to now is        2.3 secs
+
+     total energy              =     -36.45825535 Ry
+     estimated scf accuracy    <       0.00092749 Ry
+
+     iteration #  4     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  9.27E-06,  avg # of iterations =  2.0
+
+     negative rho (up, down):  2.001E-05 0.000E+00
+
+     total cpu time spent up to now is        2.8 secs
+
+     total energy              =     -36.45831299 Ry
+     estimated scf accuracy    <       0.00004726 Ry
+
+     iteration #  5     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  4.73E-07,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        3.3 secs
+
+     End of self-consistent calculation
+
+          k = 0.0000 0.0000 0.0000 ( 11363 PWs)   bands (ev):
+
+   -23.9980 -12.3947  -8.3111  -8.3111  -7.6491
+
+     highest occupied level (ev):    -7.6491
+
+!    total energy              =     -36.45832571 Ry
+     estimated scf accuracy    <       0.00000046 Ry
+
+     convergence has been achieved in   5 iterations
+
+     Using ACE for calculation of exact exchange
+
+     EXX grid:    91047 G-vectors     FFT dimensions: (  60,  60,  60)
+     ACE projected onto     5 (nbndproj) and applied to     5 (nbnd) bands
+
+     EXX: now go back to refine exchange calculation
+
+     total cpu time spent up to now is        4.1 secs
+
+     per-process dynamical memory:    17.3 Mb
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  4.73E-07,  avg # of iterations =  6.0
+
+     total cpu time spent up to now is        4.7 secs
+
+     total energy              =     -38.21919646 Ry
+     estimated scf accuracy    <       0.03548275 Ry
+
+     iteration #  2     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  3.55E-04,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        5.3 secs
+
+     total energy              =     -38.22863290 Ry
+     estimated scf accuracy    <       0.00177985 Ry
+
+     iteration #  3     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.78E-05,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        5.8 secs
+
+     total energy              =     -38.22893554 Ry
+     estimated scf accuracy    <       0.00000878 Ry
+
+     iteration #  4     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  8.78E-08,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        6.3 secs
+
+     End of self-consistent calculation
+
+          k = 0.0000 0.0000 0.0000 ( 11363 PWs)   bands (ev):
+
+   -28.7519 -16.0731 -11.0621 -11.0621 -10.9499
+
+     highest occupied level (ev):   -10.9499
+
+!    total energy              =     -38.22893682 Ry
+     estimated scf accuracy    <       0.00000038 Ry
+
+     convergence has been achieved in   4 iterations
+
+     Using ACE for calculation of exact exchange
+     ACE projected onto     5 (nbndproj) and applied to     5 (nbnd) bands
+
+     total energy              =     -38.23128449 Ry
+     Harris-Foulkes estimate   =     -38.23128472 Ry
+     est. exchange err (dexx)  =       0.00234767 Ry
+     - averaged Fock potential =       3.53850562 Ry
+     + Fock energy (ACE)       =      -1.79511476 Ry
+
+     EXX: now go back to refine exchange calculation
+
+     total cpu time spent up to now is        6.7 secs
+
+     per-process dynamical memory:    17.3 Mb
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  8.78E-08,  avg # of iterations =  5.0
+
+     total cpu time spent up to now is        7.3 secs
+
+     total energy              =     -38.23143689 Ry
+     estimated scf accuracy    <       0.00029453 Ry
+
+     iteration #  2     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  2.95E-06,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        7.8 secs
+
+     total energy              =     -38.23151291 Ry
+     estimated scf accuracy    <       0.00001413 Ry
+
+     iteration #  3     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.41E-07,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        8.5 secs
+
+     End of self-consistent calculation
+
+          k = 0.0000 0.0000 0.0000 ( 11363 PWs)   bands (ev):
+
+   -28.6763 -16.0401 -10.9977 -10.9977 -10.9204
+
+     highest occupied level (ev):   -10.9204
+
+!    total energy              =     -38.23151539 Ry
+     estimated scf accuracy    <       0.00000007 Ry
+
+     convergence has been achieved in   3 iterations
+
+     Using ACE for calculation of exact exchange
+     ACE projected onto     5 (nbndproj) and applied to     5 (nbnd) bands
+
+     total energy              =     -38.23154037 Ry
+     Harris-Foulkes estimate   =     -38.23154041 Ry
+     est. exchange err (dexx)  =       0.00002498 Ry
+     - averaged Fock potential =       3.59473971 Ry
+     + Fock energy (ACE)       =      -1.79964993 Ry
+
+     EXX: now go back to refine exchange calculation
+
+     total cpu time spent up to now is        8.9 secs
+
+     per-process dynamical memory:    17.3 Mb
+
+     Self-consistent Calculation
+
+     iteration #  1     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.41E-07,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        9.4 secs
+
+     total energy              =     -38.23154248 Ry
+     estimated scf accuracy    <       0.00000303 Ry
+
+     iteration #  2     ecut=    30.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  3.03E-08,  avg # of iterations =  2.0
+
+     total cpu time spent up to now is        9.9 secs
+
+     End of self-consistent calculation
+
+          k = 0.0000 0.0000 0.0000 ( 11363 PWs)   bands (ev):
+
+   -28.6653 -16.0361 -10.9891 -10.9891 -10.9171
+
+     highest occupied level (ev):   -10.9171
+
+!    total energy              =     -38.23154312 Ry
+     estimated scf accuracy    <       0.00000010 Ry
+
+     convergence has been achieved in   2 iterations
+
+     Using ACE for calculation of exact exchange
+     ACE projected onto     5 (nbndproj) and applied to     5 (nbnd) bands
+
+!!   total energy              =     -38.23154347 Ry
+     Harris-Foulkes estimate   =     -38.23154355 Ry
+     est. exchange err (dexx)  =       0.00000035 Ry
+     - averaged Fock potential =       3.59972924 Ry
+     + Fock energy (ACE)       =      -1.80007965 Ry
+
+     EXX self-consistency reached
+     Message from routine punch:
+     Nothing written, as per user request (disk_io='none')
+ 
+     init_run     :      2.06s CPU      0.59s WALL (       1 calls)
+     electrons    :     36.72s CPU      7.61s WALL (       4 calls)
+
+     Called by init_run:
+     aceinit0     :      0.00s CPU      0.00s WALL (       1 calls)
+     wfcinit      :      0.25s CPU      0.07s WALL (       1 calls)
+     potinit      :      1.59s CPU      0.43s WALL (       1 calls)
+     hinit0       :      0.19s CPU      0.04s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :     10.64s CPU      1.74s WALL (      14 calls)
+     sum_band     :      3.25s CPU      0.50s WALL (      14 calls)
+     v_of_rho     :     24.50s CPU      5.96s WALL (      16 calls)
+     mix_rho      :      1.16s CPU      0.15s WALL (      14 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.00s CPU      0.02s WALL (      29 calls)
+     cegterg      :     10.64s CPU      1.73s WALL (      14 calls)
+
+     Called by *egterg:
+     cdiaghg      :      0.00s CPU      0.01s WALL (      46 calls)
+     h_psi        :     10.06s CPU      1.68s WALL (      50 calls)
+     g_psi        :      0.00s CPU      0.00s WALL (      35 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      0.00s CPU      0.01s WALL (      50 calls)
+     vloc_psi     :      9.77s CPU      1.63s WALL (      50 calls)
+     add_vuspsi   :      0.00s CPU      0.01s WALL (      50 calls)
+
+     General routines
+     calbec       :      0.23s CPU      0.03s WALL (     102 calls)
+     fft          :      2.25s CPU      0.32s WALL (     154 calls)
+     ffts         :      0.53s CPU      0.04s WALL (      14 calls)
+     fftw         :     10.27s CPU      1.65s WALL (     530 calls)
+     fftc         :      3.89s CPU      0.57s WALL (     200 calls)
+     fftcw        :      1.69s CPU      0.19s WALL (      60 calls)
+ 
+     Parallel routines
+
+     EXX routines
+     exx_grid     :      0.00s CPU      0.00s WALL (       1 calls)
+     exxinit      :      3.06s CPU      0.51s WALL (       4 calls)
+     vexx         :      6.44s CPU      1.20s WALL (       4 calls)
+     matcalc      :      0.23s CPU      0.02s WALL (      52 calls)
+     aceupdate    :      0.00s CPU      0.00s WALL (       4 calls)
+     vexxace      :      0.42s CPU      0.03s WALL (      41 calls)
+     aceinit      :      6.44s CPU      1.21s WALL (       4 calls)
+ 
+     PWSCF        :     49.88s CPU     10.34s WALL
+
+ 
+   This run was terminated on:  13:29:28  29Mar2026            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

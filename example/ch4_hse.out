@@ -1,0 +1,185 @@
+
+
+       ---------------------------
+       --                       --
+       --     Plane Wave DFT    --
+       --       by  dcccc       --
+       --        2021.9.9       --
+       --                       --
+       ---------------------------
+
+
+
+
+Read input file
+State number not set!
+Use occupied state number!
+
+
+
+Realspace Lattice Vector ( Bohr )
+       16.000000       0.000000       0.000000
+        0.000000      16.000000       0.000000
+        0.000000       0.000000      16.000000
+
+
+Reciprocal Lattice Vectors ( Bohr^-1 )
+        0.392699       0.000000       0.000000
+        0.000000       0.392699       0.000000
+        0.000000       0.000000       0.392699
+
+
+Structure Atom Number: 5
+
+
+Atom Coordinate and Valence Electron Number:
+      atom           x               y               z         valence electron num
+       C        7.312017        8.101006        8.396370              4
+       H        9.375976        8.101025        8.396370              1
+       H        6.624043        6.323889        9.189129              1
+       H        6.624043        8.303037        6.460969              1
+       H        6.624024        9.676112        9.539031              1
+
+
+Total Valence Electron Num           : 8
+Number of occpuied state             : 4
+Number of empty state                : 0
+
+
+Eelectron Wavefunction Cutoff Energy :  15.00 ( Hartree )
+Eelectron Density Cutoff Energy      :  60.00 ( Hartree )
+Eelectron Wavefunction Cutoff Energy :  15.00 ( Hartree )
+Reciprocal Grid Point Number         :   60    60    60
+Wavefunction Point number            :   11363
+Reciprocal Point number              :   91047
+
+
+XC functional                        :
+Functional ID: 428
+Functional Name: hyb_gga_xc_hse06
+Attributes:
+    Name: HSE06
+    Kind: 2
+  Family: 32
+Citations:
+   J. Heyd, G. E. Scuseria, and M. Ernzerhof.,  J. Chem. Phys. 118, 8207 (2003)
+   J. Heyd, G. E. Scuseria, and M. Ernzerhof.,  J. Chem. Phys. 124, 219906 (2006)
+   A. V. Krukau, O. A. Vydrov, A. F. Izmaylov, and G. E. Scuseria.,  J. Chem. Phys. 125, 224106 (2006)
+exx_alpha parameter:   0.25
+CAM hybrid functional, beta parameter:   0.11
+
+
+
+HF, or xc functionals is MGGA or hybrid functional, using the pbe fuctional results wavefuntion as the initial guess
+Start PBE Self Consistent Field Calculation :
+scf:  1  Etot=-4.38951535  dEtot=-1.94984984   deval= 0.00012439     drho= 2.67973
+scf:  2  Etot=-6.88453346  dEtot=-2.49501811   deval= 2.85074514     drho= 513.00677
+scf:  3  Etot=-5.69018999  dEtot= 1.19434348   deval= 0.00165874     drho= 424.84652
+scf:  4  Etot=-7.12187984  dEtot=-1.43168985   deval= 0.18582682     drho= 263.21950
+scf:  5  Etot=-7.59348260  dEtot=-0.47160277   deval= 0.21181796     drho= 182.29537
+scf:  6  Etot=-7.67127242  dEtot=-0.07778982   deval= 0.10325788     drho= 124.37460
+scf:  7  Etot=-7.66049607  dEtot= 0.01077636   deval= 0.02000270     drho= 91.05135
+scf:  8  Etot=-7.69947813  dEtot=-0.03898206   deval= 0.01573836     drho= 68.84249
+scf:  9  Etot=-7.75412905  dEtot=-0.05465093   deval= 0.02686597     drho= 54.00905
+scf: 10  Etot=-7.80892519  dEtot=-0.05479613   deval= 0.02460274     drho= 41.60173
+scf: 11  Etot=-7.84827148  dEtot=-0.03934630   deval= 0.01852400     drho= 32.32663
+scf: 12  Etot=-7.87266758  dEtot=-0.02439609   deval= 0.01267954     drho= 25.30944
+scf: 13  Etot=-7.88802435  dEtot=-0.01535677   deval= 0.00836453     drho= 19.86821
+scf: 14  Etot=-7.89838891  dEtot=-0.01036456   deval= 0.00565781     drho= 15.50246
+scf: 15  Etot=-7.90547410  dEtot=-0.00708519   deval= 0.00396807     drho= 12.01203
+scf: 16  Etot=-7.90971011  dEtot=-0.00423600   deval= 0.00287697     drho= 9.29909
+scf: 17  Etot=-7.91276564  dEtot=-0.00305554   deval= 0.00216831     drho= 7.23096
+scf: 18  Etot=-7.91519385  dEtot=-0.00242821   deval= 0.00176710     drho= 5.63246
+scf: 19  Etot=-7.91732687  dEtot=-0.00213302   deval= 0.00145930     drho= 4.39656
+scf: 20  Etot=-7.91900098  dEtot=-0.00167411   deval= 0.00120309     drho= 3.44968
+scf: 21  Etot=-7.92040145  dEtot=-0.00140047   deval= 0.00096349     drho= 2.71797
+scf: 22  Etot=-7.92145076  dEtot=-0.00104931   deval= 0.00076406     drho= 2.15371
+scf: 23  Etot=-7.92225810  dEtot=-0.00080734   deval= 0.00058842     drho= 1.71162
+scf: 24  Etot=-7.92282820  dEtot=-0.00057010   deval= 0.00044944     drho= 1.36366
+scf: 25  Etot=-7.92323674  dEtot=-0.00040854   deval= 0.00033701     drho= 1.08773
+scf: 26  Etot=-7.92350752  dEtot=-0.00027078   deval= 0.00025265     drho= 0.86838
+scf: 27  Etot=-7.92369455  dEtot=-0.00018703   deval= 0.00018854     drho= 0.69316
+scf: 28  Etot=-7.92381414  dEtot=-0.00011959   deval= 0.00014239     drho= 0.55346
+scf: 29  Etot=-7.92389704  dEtot=-0.00008291   deval= 0.00010814     drho= 0.44178
+scf: 30  Etot=-7.92395109  dEtot=-0.00005405   deval= 0.00008366     drho= 0.35277
+scf: 31  Etot=-7.92399133  dEtot=-0.00004023   deval= 0.00006523     drho= 0.28161
+scf: 32  Etot=-7.92401976  dEtot=-0.00002844   deval= 0.00005158     drho= 0.22491
+scf: 33  Etot=-7.92404234  dEtot=-0.00002258   deval= 0.00004081     drho= 0.17959
+scf: 34  Etot=-7.92405868  dEtot=-0.00001634   deval= 0.00003240     drho= 0.14347
+scf: 35  Etot=-7.92407142  dEtot=-0.00001274   deval= 0.00002557     drho= 0.11458
+scf: 36  Etot=-7.92408038  dEtot=-0.00000896   deval= 0.00002018     drho= 0.09153
+scf: 37  Etot=-7.92408704  dEtot=-0.00000666   deval= 0.00001583     drho= 0.07310
+scf: 38  Etot=-7.92409152  dEtot=-0.00000449   deval= 0.00001243     drho= 0.05839
+scf: 39  Etot=-7.92409470  dEtot=-0.00000317   deval= 0.00000974     drho= 0.04663
+scf: 40  Etot=-7.92409676  dEtot=-0.00000206   deval= 0.00000765     drho= 0.03723
+scf: 41  Etot=-7.92409817  dEtot=-0.00000142   deval= 0.00000601     drho= 0.02973
+scf: 42  Etot=-7.92409908  dEtot=-0.00000091   deval= 0.00000474     drho= 0.02374
+scf: 43  Etot=-7.92409970  dEtot=-0.00000063   deval= 0.00000375     drho= 0.01895
+scf: 44  Etot=-7.92410011  dEtot=-0.00000041   deval= 0.00000297     drho= 0.01514
+scf: 45  Etot=-7.92410040  dEtot=-0.00000029   deval= 0.00000236     drho= 0.01209
+scf: 46  Etot=-7.92410060  dEtot=-0.00000019   deval= 0.00000188     drho= 0.00966
+scf: 47  Etot=-7.92410074  dEtot=-0.00000014   deval= 0.00000150     drho= 0.00771
+scf: 48  Etot=-7.92410083  dEtot=-0.00000009   deval= 0.00000119     drho= 0.00616
+scf: 49  Etot=-7.92410089  dEtot=-0.00000006   deval= 0.00000095     drho= 0.00493
+scf: 50  Etot=-7.92410093  dEtot=-0.00000004   deval= 0.00000076     drho= 0.00394
+scf: 51  Etot=-7.92410096  dEtot=-0.00000002   deval= 0.00000060     drho= 0.00315
+scf: 52  Etot=-7.92410097  dEtot=-0.00000001   deval= 0.00000048     drho= 0.00252
+scf: 53  Etot=-7.92410097  dEtot=-0.00000000   deval= 0.00000038     drho= 0.00201
+scf: 54  Etot=-7.92410097  dEtot=-0.00000000   deval= 0.00000030     drho= 0.00161
+scf: 55  Etot=-7.92410097  dEtot= 0.00000000   deval= 0.00000024     drho= 0.00129
+scf: 56  Etot=-7.92410097  dEtot= 0.00000000   deval= 0.00000019     drho= 0.00103
+scf: 57  Etot=-7.92410096  dEtot= 0.00000000   deval= 0.00000015     drho= 0.00082
+scf: 58  Etot=-7.92410096  dEtot= 0.00000000   deval= 0.00000012     drho= 0.00066
+scf: 59  Etot=-7.92410096  dEtot= 0.00000000   deval= 0.00000010     drho= 0.00053
+
+
+
+Start Self Consistent Field Calculation :
+----------------------------------------------------------------------------------
+scf:  1  Etot=-7.93625919  dEtot=-0.00273810   deval= 0.00002532     drho= 0.39609
+scf:  2  Etot=-7.93692236  dEtot=-0.00066317   deval= 0.00192440     drho= 0.58777
+scf:  3  Etot=-7.93693103  dEtot=-0.00000868   deval= 0.00011615     drho= 0.58690
+scf:  4  Etot=-7.93658581  dEtot= 0.00034522   deval= 0.00022558     drho= 0.47527
+scf:  5  Etot=-7.93615936  dEtot= 0.00042645   deval= 0.00022333     drho= 0.33993
+scf:  6  Etot=-7.93579411  dEtot= 0.00036525   deval= 0.00015832     drho= 0.21363
+scf:  7  Etot=-7.93567382  dEtot= 0.00012029   deval= 0.00008438     drho= 0.14216
+scf:  8  Etot=-7.93566408  dEtot= 0.00000974   deval= 0.00001119     drho= 0.11143
+scf:  9  Etot=-7.93571281  dEtot=-0.00004873   deval= 0.00002245     drho= 0.08803
+scf: 10  Etot=-7.93577581  dEtot=-0.00006300   deval= 0.00003444     drho= 0.06816
+scf: 11  Etot=-7.93585637  dEtot=-0.00008057   deval= 0.00003415     drho= 0.04675
+scf: 12  Etot=-7.93591706  dEtot=-0.00006069   deval= 0.00002872     drho= 0.03147
+scf: 13  Etot=-7.93597016  dEtot=-0.00005310   deval= 0.00001903     drho= 0.02014
+scf: 14  Etot=-7.93600085  dEtot=-0.00003069   deval= 0.00001135     drho= 0.01387
+scf: 15  Etot=-7.93601325  dEtot=-0.00001240   deval= 0.00000406     drho= 0.01120
+scf: 16  Etot=-7.93601640  dEtot=-0.00000315   deval= 0.00000049     drho= 0.00946
+scf: 17  Etot=-7.93601531  dEtot= 0.00000109   deval= 0.00000238     drho= 0.00796
+scf: 18  Etot=-7.93601101  dEtot= 0.00000430   deval= 0.00000275     drho= 0.00645
+scf: 19  Etot=-7.93600724  dEtot= 0.00000378   deval= 0.00000250     drho= 0.00507
+scf: 20  Etot=-7.93600380  dEtot= 0.00000344   deval= 0.00000172     drho= 0.00392
+scf: 21  Etot=-7.93600228  dEtot= 0.00000152   deval= 0.00000102     drho= 0.00310
+scf: 22  Etot=-7.93600181  dEtot= 0.00000047   deval= 0.00000033     drho= 0.00246
+scf: 23  Etot=-7.93600198  dEtot=-0.00000017   deval= 0.00000005     drho= 0.00198
+scf: 24  Etot=-7.93600239  dEtot=-0.00000041   deval= 0.00000022     drho= 0.00156
+scf: 25  Etot=-7.93600400  dEtot=-0.00000161   deval= 0.00000022     drho= 0.00117
+scf: 26  Etot=-7.93600381  dEtot= 0.00000018   deval= 0.00000026     drho= 0.00092
+scf: 27  Etot=-7.93600505  dEtot=-0.00000124   deval= 0.00000001     drho= 0.00071
+SCF calculation converageed!
+
+
+State and Eigenvalue             :
+  state num      eigenvalue energy       occupation num
+      1             -0.690057                1.0
+      2             -0.377907                1.0
+      3             -0.377892                1.0
+      4             -0.377854                1.0
+
+
+E_kinectic  =    6.22699064 (Hatree)
+E_xc        =   -2.54950946 (Hatree)
+E_hf        =   -0.61632306 (Hatree)
+E_hatree    =    9.54709655 (Hatree)
+E_loc       =  -24.96759387 (Hatree)
+E_nloc      =    0.49560297 (Hatree)
+E_pspcore   =   -0.00009580 (Hatree)
+E_NN        =    3.92782698 (Hatree)
+E_total     =   -7.93600505 (Hatree)

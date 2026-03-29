@@ -8,7 +8,7 @@ A plane-wave basis DFT code, which is written with python. This code is translat
 
 ## How To Run
 
-A sample input file for the calculation of a ch4 molecule in a box is as below
+A sample input file for the calculation of a ch4 molecule in a cubic box is as below
 
 ```
 e_cut 15
@@ -31,7 +31,7 @@ The first line of input text is the wavefunction cutoff energy parameter, the de
 
 The second line is the number of states you want to calculate. if the parameter is 0, not set, or the value is smaller than the half of the total electron number, an integer of no smaller than half of the total electrons number will be used.
 
-The 3rd line is the functional names in libxc[2] used in the calculation. If not set or pylibxc not installed, the default xalpha[3] will be used.
+The 3rd line is the functional names in libxc[2] used in the calculation. If not set or pylibxc not installed, the default xalpha[3] will be used. At present, LDA, GGA, MGGA, hybrid functional and range-seperated hybrid functional are supported. You can refer to the input files in example directory for different functionals. 
 
 5th to 7th line is the box lattice parameter, and unit is Bohr
 
@@ -66,6 +66,8 @@ In the calculation of ch4 example, we use the defualt simplest xalpha[3] functio
 3. The code is pure python and not optimized, and calculation may be unacceptably slow for large systems. You should use a more mature code to do the serious calculation, like quantum espresso
 
 4. As the fixed occupation method used here, and only the gamma point is considered. The scf will not be converged for delocalized systems. But for localized systems, the scf can converge easily
+
+5. The results of r2scan functionl are little different from the results by quantum espresso. At present, the reason is not clear, and have no clue about where bug is.
 
 ## Reference
 

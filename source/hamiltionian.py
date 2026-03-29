@@ -12,6 +12,48 @@ except:
     libxc_installed = False
 
 
+# 计算重叠密度矩阵元素
+def get_phi(psi_g, op_coul, vol):    
+    # phi_ia = <psi_i|psi_a> = ifft(psi_i(r)*psi_a(r))
+    psi_r = [np.fft.ifftn(i) for i in psi_g]
+    grid = list(op_coul.shape)
+    phi_ia = np.zeros([len(psi_r), len(psi_r)] + grid, dtype=np.complex128)
+    for i in range(len(psi_r)):
+        for a in range(len(psi_r)):
+            phi_ia[i, a] = np.fft.ifftn(np.fft.fftn(np.conj(psi_r[i])*psi_r[a])*op_coul/16**3)
+    
+    # phi_ia = phi_ia
+    return(phi_ia)
+
+
+def cal_op_hf(psi_g_3d, phi_ia, op_coul, volume, if_update_phi = True):
+    psi_num = len(psi_g_3d)
+    op_hf_3d = np.zeros(psi_g_3d.shape, dtype = np.complex128)
+    psi_r = [np.fft.ifftn(i) for i in psi_g_3d]
+    grid = op_coul.shape
+
+    if if_update_phi:
+        phi_ia = get_phi(psi_g_3d, op_coul)
+        for n in range(psi_num):
+            tmp_v = 0.+ 0.j
+            for m in range(psi_num):
+                tmp_v += psi_r[m]* phi_ia[m, n] 
+
+            op_hf_3d[n] = -1*np.fft.fftn(tmp_v) 
+    else:
+        for n in range(psi_num):
+            tmp_v = 0.+ 0.j
+            for m in range(psi_num):
+                tmp_v += psi_r[m]* phi_ia[m, n] 
+
+            op_hf_3d[n] = -1*np.fft.fftn(tmp_v) 
+
+    op_hf_3d = np.array(op_hf_3d)
+
+    return(op_hf_3d)
+
+
+
 # 计算hatree 势
 
 def cal_V_hatree(rho_r, g2_vector, grid_point):
@@ -47,7 +89,7 @@ def cal_V_tau(vtau, psi_g_3d, g1_vector):
 
 
 
-def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = []):
+def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = [], exx_alpha=0.0):
     "计算xalpha势"
     rho_r, rho_grad_r, kden, rho_lapl = rho_value
 
@@ -60,7 +102,10 @@ def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = []
 
         is_need_tau = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_TAU  for xc in libxc]) 
         is_need_lap = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_LAPLACIAN  for xc in libxc]) 
-        is_gga = np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_GGA  for xc in libxc])
+        is_gga  = np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_GGA  for xc in libxc])
+        is_gga += np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_HYB_GGA for xc in libxc]) 
+        is_gga = is_gga > 0
+
 
         if is_gga or is_need_lap or is_need_tau:
             rho_grad_r_x , rho_grad_r_y , rho_grad_r_z = rho_grad_r 
@@ -92,7 +137,8 @@ def cal_V_xc(rho_value, g1_vector, g2_vector, vol, state_occupy_list, libxc = []
                 vlapl = res['vlapl'].reshape(shape)
                 vlapl[np.isnan(vlapl)] = 0.0
                 V_xc = V_xc - np.real(np.fft.ifftn(np.fft.fftn(vlapl)*g2_vector))
-
+    elif exx_alpha == 1.0:
+        V_xc, vtau = 0.0, 0.0
     else:
         alpha = 2. / 3.
         V_xc = -1.* (3./2.* alpha) * np.cbrt(3. / np.pi * rho_r) / 2.
@@ -158,13 +204,24 @@ def op_V_loc(psi_g_3d, V_loc_r):
     return(op_V_loc_g)
 
 
-def op_H(V_loc_r, V_xc_all, psi_g_3d, rho_r, beta_nl, g2_vector, g1_vector, grid_point, ps_list, atom_symbol, vol, state_occupy_list):
+def op_H(V_loc_r, V_xc_all, psi_g_3d, rho_r, beta_nl, g2_vector, g1_vector, op_coul, 
+         grid_point, ps_list, atom_symbol, vol, state_occupy_list, phi_ia, exx_alpha=0.0, if_update_phi = False):
      
     V_loc_r0 = cal_hamiltionian(V_loc_r, psi_g_3d, rho_r, grid_point, g2_vector, g1_vector, vol, state_occupy_list)
     V_ps_nloc  = cal_V_ps_nloc(beta_nl, psi_g_3d, ps_list, atom_symbol, grid_point)
     
 
-    V_xc_r, vtau_r =  V_xc_all
+    if exx_alpha == 1.0:
+        V_xc_r = 0.0
+        vtau_r = 0.0
+    else:
+        V_xc_r, vtau_r =  V_xc_all
+
+    # 计算exact exchange算符
+    op_hf = 0.0
+    if exx_alpha > 0.0:
+        op_hf = cal_op_hf(psi_g_3d, phi_ia, op_coul, vol, if_update_phi=if_update_phi)
+    
 
     # 计算metagga中的动能算符
     op_tau = cal_V_tau(vtau_r, psi_g_3d, g1_vector)
@@ -173,9 +230,9 @@ def op_H(V_loc_r, V_xc_all, psi_g_3d, rho_r, beta_nl, g2_vector, g1_vector, grid
     op_k_g  = cal_op_k(psi_g_3d, g2_vector)     
     
     # 计算倒空间中的局域算符
-    op_v_loc_g = op_V_loc(psi_g_3d, V_loc_r0 + V_xc_r)
+    op_v_loc_g = op_V_loc(psi_g_3d, V_loc_r0 + V_xc_r) 
     
-    op_H_g = op_k_g + op_v_loc_g + V_ps_nloc + op_tau
+    op_H_g = op_k_g + op_v_loc_g + V_ps_nloc  + op_hf  * exx_alpha + op_tau 
 
     return(op_H_g)
     

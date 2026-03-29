@@ -146,7 +146,7 @@ class Input(object):
             if line_split[0] == "xc" :
                 self.xc = line_split[1:]
             else:
-                self.xc = [] 
+                self.xc = []
                 
         
         self.rho_cutoff  =  self.wf_cutoff * 4.

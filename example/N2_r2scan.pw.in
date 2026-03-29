@@ -1,9 +1,9 @@
  &control
-    calculation = 'scf',pseudo_dir="./", disk_io="none",prefix='N2',
+    calculation = 'scf',pseudo_dir="./", disk_io="none",
  /
  &system    
     ibrav=  1, celldm(1) =16, nat=  2, ntyp= 1,
-    ecutwfc =30.0, ecutrho=120, nbnd = 5,nosym=.true.,
+    ecutwfc =30.0, ecutrho=120, nbnd = 5,
     input_dft='xc-000i-000i-000i-000i-497l-498l',
  /
  &electrons

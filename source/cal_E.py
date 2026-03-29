@@ -18,6 +18,21 @@ except:
 
 # 计算能量
 
+
+def cal_hf_energy(psi_g_3d, op_coul, g2vector_mask):
+
+    psi_r = [np.fft.ifftn(i) for i in psi_g_3d]
+    grid = g2vector_mask.shape
+    e_hf = 0.0
+    for i in range(len(psi_g_3d)):
+        for a in range(len(psi_g_3d)):
+            phi_ia = np.fft.fftn(np.conj(psi_r[i])*psi_r[a])[g2vector_mask] 
+            e_hf += np.sum(phi_ia*np.conj(phi_ia)*op_coul)
+
+    e_hf = np.prod(grid)**2*e_hf *-2
+    return(e_hf.real)
+
+
 #计算动能
 
 def cal_kinetic_e(psi_g, g2_vector, state_occupy_list ):
@@ -35,8 +50,10 @@ def cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=[]):
     rho_r, rho_grad_r, kden, rho_lapl = rho_value
     is_need_tau = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_TAU  for xc in libxc]) 
     is_need_lap = np.sum([xc.get_flags() & pylibxc.flags.XC_FLAGS_NEEDS_LAPLACIAN  for xc in libxc]) 
-    is_gga = np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_GGA  for xc in libxc])
-
+    is_gga  = np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_GGA  for xc in libxc])
+    is_gga += np.sum([xc.get_family() & pylibxc.flags.XC_FAMILY_HYB_GGA for xc in libxc]) 
+    is_gga = is_gga > 0
+    
     E_xc = 0.0
     shape = rho_r.shape
     inp = {}
@@ -57,7 +74,6 @@ def cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=[]):
         for xc in libxc:   
             res = xc.compute(inp, do_exc=True, do_vxc=False)
             E_xc += np.sum(res['zk'].reshape(shape) * rho_r)* vol / n_point 
-        # print('vsigma', res['vsigma'].reshape((60,60,60))[:,0,0])
     else:
         alpha = 2. / 3.
         E_xc = -9./8.* alpha * np.cbrt(3./ np.pi) * np.sum( rho_r**(4./3.))    
@@ -232,7 +248,7 @@ def cal_ewald_sum(atom_pos, latt9, rec_latt, atom_charge):
 
 # 总能
 
-def cal_E_total(psi_g_3d, V_loc_r, rho_value, beta_nl, input, g_vector, libxc):
+def cal_E_total(psi_g_3d, V_loc_r, rho_value, beta_nl, input, g_vector, libxc, exx_alpha=0.0):
     
 	
     state_occupy_list = input.state_occupy_list
@@ -252,16 +268,22 @@ def cal_E_total(psi_g_3d, V_loc_r, rho_value, beta_nl, input, g_vector, libxc):
     g2_vector      = g_vector.g2_vector
     n_gxw          = g_vector.n_gxw
     g_vector_mask  = g_vector.g_vector_mask
-	
-	
+    op_coul        = g_vector.op_coul
 	
     n_point    = np.prod(grid_point)
     
     rho_r      = cal_rhoe(psi_g_3d,  vol, state_occupy_list, grid_point)
 
+    E_hf = 0.0 
+    if exx_alpha > 0.0:
+        E_hf  = cal_hf_energy(psi_g_3d, op_coul[g_vector_mask] , g_vector_mask) / vol /2 * exx_alpha
+
+
     E_kinectic = cal_kinetic_e(psi_g_3d, g2_vector, state_occupy_list )
 
-    E_xc       = cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=libxc) 
+    E_xc = 0.0
+    if exx_alpha != 1.0:
+        E_xc       = cal_E_xc(rho_value, vol, state_occupy_list , n_point, g1_vector, libxc=libxc)
     
     E_hatree   = cal_E_hatree(rho_r, g2_vector, g_vector_mask.copy(), vol, n_point, grid_point)    
     
@@ -273,7 +295,7 @@ def cal_E_total(psi_g_3d, V_loc_r, rho_value, beta_nl, input, g_vector, libxc):
     
     E_NN       = cal_ewald_sum(atom_pos, latt9, rec_latt, atom_charge) 
     
-    E_total    = [E_kinectic, E_xc, E_hatree, E_loc, E_ps_nl, E_pscore, E_NN] 
+    E_total    = [E_kinectic, E_xc, E_hf, E_hatree, E_loc, E_ps_nl, E_pscore, E_NN] 
     
     
     
